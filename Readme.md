@@ -400,3 +400,346 @@
 - RS-232 - Asenkron karakter aktarımı için EIA standardı
 - Saniyedeki karakter sayısı ve baud hızı
 - Bant genişliği maksimum veri iletim hızını sınırlar
+
+# Uzun mesafe iletişimi
+
+- RS-232 tarafından kullanılan kodlama her durumda çalışamaz
+  - Uzun mesafelerde
+  - Telefon gibi mevcut sistemleri kullanma
+- Farklı kodlama stratejileri gerekli
+
+# Uzun mesafelerde sinyal gönderme
+
+- Elektrik akımı tel üzerinde ilerledikçe zayıflar
+- Sonuçta ortaya çıkan sinyal kaybı verilerin doğru bir şekilde kodunun çözülmesini engelleyebilir
+- Sinyal kaybı uzun mesafelerde RS-232 kullanımını önler
+
+# Salınım sinyalleri
+
+- Sürekli, salınımlı sinyal elektrik akımından daha fazla yayılır
+- Uzun mesafeli iletişim, taşıyıcı olarak adlandırılan böyle bir sinyal kullanır
+- Taşıyıcı için dalga formu şuna benzer:
+- Taşıyıcı, RS-232 sinyalinden çok daha uzun mesafelerde tespit edilebilir
+
+# Verileri bir operatörle kodlama
+
+- Temel taşıyıcıdaki değişiklikler iletim için verileri kodlar
+- Modülasyon adı verilen teknik
+- Radyoda olduğu gibi aynı fikir, televizyon iletimi
+- Tüm medya türlerinde kullanılan taşıyıcı modülasyonu - bakır, fiber, radyo, kızılötesi, lazer
+
+# Modülasyon türleri
+
+- Amplitude modulation(Genlik modülasyonu): Veriyi kodlamak için taşıyıcının gücü veya genliği modüle edilir
+- Frequency modulation (Frekans modülasyonu): Taşıyıcının frekansı verileri kodlamak için modüle edilir
+- Phase shift modulation (Faz kayması modülasyonu): Zamanlamadaki değişiklikler veya faz kaymaları verileri kodlar
+
+- Amplitude modulation:
+
+<center><image src="./image/amplitude.png" witdh="300" height="300"></center>
+
+- Phase shift modulation:
+
+<center><image src="./image/phaseshift.png" witdh="300" height="300"></center>
+
+# Faz kaydırma modülasyonu ile veri kodlama
+
+- Faz kayması miktarı hassas bir şekilde ölçülebilir
+- Sinüs dalgasının ne kadarının "atlandığını" ölçer
+- Örnek 1/2 ve 3/4 döngüsünü gösterir
+
+<center><image src="./image/phaseshift.png" witdh="300" height="300"></center>
+
+- Her faz kayması birden fazla bit taşımak için kullanılabilir; örneğin, dört olası faz kayması 2 biti kodlar:
+  - 00 - vardiya yok
+  - 01 - 1/4 faz
+  - 10 - 1/2 faz
+  - 11 - 3/4 faz
+- Böylece, her faz kayması 2 bit taşır
+- Veri hızı bant hızının iki katı
+
+# Veri iletimi için donanım
+
+- Modülatör, veri bitlerini modüle edilmiş taşıyıcı olarak kodlar
+- Demodülatör bitleri taşıyıcıdan çözer
+- Veri iletimi kaynakta modülatör ve hedefte demodülatör gerektirir
+
+# Tam çift yönlü iletişim
+
+- Çoğu sistem aynı anda çift yönlü veya tam çift yönlü iletim sağlar
+- Her iki uç noktada modülatör ve demodülatör gerektirir:
+
+<center><image src="./image/fullduplex.png" witdh="300" height="300"></center>
+
+- Uzun mesafeli bağlantıya 4 telli devre denir
+- Modülatör ve demodülatör genellikle modem adı verilen tek bir cihazda (modülatör / demodülatör)
+
+# Modems
+
+<center><image src="./image/modem1.png" witdh="300" height="300"></center>
+
+- Bilgisayara harici ise, modem ile bilgisayar arasında RS-232 kullanılabilir
+- Dahili ise, doğrudan veri yolu bağlantısı kullanılırsa
+- Ayrıca rafa monte edilebilir
+
+# Kiralanan seri veri devreleri
+
+- Kuruluşlar genellikle ağdaki 4 telli devreleri içerir
+- Bir site içinde - bir kampüste - organizasyon kendi 4 telli devrelerini kurabilir
+- Telefon şirketi kampüs dışı kablolar tedarik ediyor
+  - Telefon kablolarının genişletme için ekstra telleri (devreleri) vardır
+  - Telefon şirketi kiralama için telgraf kullanma hakkı
+  - Kuruluş veri aktarımı için modem kullanıyor
+- Seri veri devresi veya seri hat olarak adlandırılır
+- Telefon devrelerine paralel (ancak bağlı değil) olarak çalışır
+
+# Optical, radio and dialup modems (Optik, radyo ve çevirmeli modemler)
+
+- Özel veri devrelerine ek olarak diğer ortamlarla kullanılan modemler
+- Veri kodlaması için modülasyon kullanan özel kodlama / kod çözücü transdüserleri
+- Glass(Cam) - modüle edilmiş ışık demeti olarak kodlanmış veriler
+- Radio(Radyo) - modüle edilmiş radyo sinyali olarak kodlanmış veriler
+- Dialup(Çevirmeli) bağlantı - modüle edilmiş ses olarak kodlanmış veriler
+- Çevirmeli modem sıradan telefon hattına bağlanır
+
+<center><image src="./image/modemmodel.png" witdh="300" height="300"></center>
+
+# Dialup modems (Çevirmeli modemler)
+
+- Veri gönderme devresi
+- Telefon çalışmasını taklit eden devre
+  - Ahize kaldırma
+  - Çevirme
+  - Ahizenin değiştirilmesi (telefonu kapatma)
+  - Çevir sesini algılama
+- Bir ses kanalında tam çift yönlü
+  - Her yön için farklı taşıyıcı frekansları
+- Filtreler paraziti ortadan kaldırır
+
+# Dialup (Çevirmeli) modemlerin çalışması
+
+- Modemi almak cevap modunda çağrı bekler
+- Çağrı modunda diğer modem
+  - Ahizeyi kaldırmayı simüle eder
+  - Çevir sesini dinler
+  - Arama numarasına tonlar (veya darbeler) gönderir
+- Modemi yanıtlama
+  - Zil sesini algılar
+  - Ahizeyi kaldırmayı simüle eder
+  - Operatör gönderir
+- Modem çağırma
+  - Operatör gönderir
+- Veri alışverişi
+
+# Taşıyıcı frekansları ve çoğullama
+
+- Veri içeren çoklu sinyaller aynı ortamda parazit olmadan taşınabilir
+  - Aynı anda birden çok veri akışına izin verir
+  - Çevirmeli modemler bir ses kanalında tam çift yönlü veri taşıyabilir
+- Örnek - hava ortamında çoklu TV istasyonları
+- Her ayrı sinyale kanal denir
+
+# Multiplexing (Çoklayıcı)
+
+- Bir ortam üzerinde birden fazla sinyalin taşınmasına çoklama denir
+
+<center><image src="./image/coklayici.png" witdh="300" height="300"></center>
+
+- Frekans bölmeli çoklama (FDM) farklı taşıyıcı frekansları kullanarak çoklama sağlar
+- Alıcı belirli bir frekansı "ayarlayabilir" ve o kanal için modülasyonu çıkarabilir
+  - Paraziti önlemek için frekanslar ayrılmalıdır
+  - Yalnızca farklı frekanslarda birden fazla sinyal taşıyabilen ortamlarda kullanışlıdır - yüksek bant genişliği gerekir
+
+# Yayılı spektrum çoğullama
+
+- Yayılı spektrum çoklu taşıyıcılar kullanır
+- Tek bir veri akışı bölünmüş ve farklı operatörlere gönderilmiştir
+- Paraziti atlamak veya kablo dinlemekten kaçınmak için kullanılabilir
+
+# Zaman bölmeli çoğullama
+
+- Zaman bölmeli çoğullama tek bir taşıyıcı kullanır ve veri akışlarını sırayla gönderir
+- Verici / alıcı çiftleri tek kanalı paylaşır
+- Paylaşılan medya kullanılan çoğu bilgisayar ağının temeli - sonraki bölümlerde ayrıntılar verecektir
+
+# Özet
+
+- Uzun mesafeli iletişim, güvenilir iletişim için taşıyıcı ve modülasyon kullanır
+- Modülatör verileri kodlar ve demodülatör verileri deşifre eder
+- Genlik, frekans veya faz kaydırma modülasyonu kullanabilir
+- Birden çok verici / alıcı çifti, tek bir ortamı paylaşmak için çoğullamayı kullanabilir
+
+# Shared communication media (Paylaşılan iletişim medyası)
+
+- Çoğu ağ, tüm bilgisayarları birbirine bağlayan paylaşılan medya kullanır
+- Ancak - aynı anda yalnızca bir kaynak veri iletebilir
+
+# Packets (Paketler)
+
+- Çoğu ağ iletim için paket adı verilen küçük bloklara bölünür
+- Her paket ayrı ayrı gönderilir
+- Bu tür ağlara paket ağlar veya paket anahtarlama ağları denir
+
+# Motivation (Motivasyon)
+
+- Koordinasyon: Verici ve alıcının hangi verilerin doğru bir şekilde alındığını ve hangilerinin alınmadığını belirlemesine yardımcı olur
+- Kaynak paylaşımı: Birden çok bilgisayarın ağ altyapısını paylaşmasına izin verir
+- Ağlar adil kullanımı zorunlu kılar: Her bilgisayar bir seferde yalnızca bir paket gönderebilir
+
+# Özel ağ erişimi
+
+- Ağ üzerinden 56Kbps kapasite ile aktarılan 5MB dosya için 12 dakika gerekir:
+  - 5x106 bytes _ 8 bits/byte / 60 secs/minute _ 56x103 bits/second = 11.9 minutes
+- Diğer tüm bilgisayarlar, başka aktarımlar başlatmadan önce 12 dakika beklemek zorunda kalacaktır
+
+# Packet switching access (Paket anahtarlama erişimi)
+
+- Dosya paketlere bölünürse, diğer bilgisayarlar yalnızca paket (tüm dosya değil) gönderilinceye kadar beklemelidir
+- Önceki örnekten, dosyanın 1000 baytlık paketlere bölündüğünü varsayalım
+- Her paketin iletilmesi 0,2 saniyeden az sürer:
+  - 1000 bayt \* 8 bit / bayt / 56x103 bit / saniye = .143 saniye
+- Diğer bilgisayarlar iletmeye başlamadan önce yalnızca .143 saniye beklemelidir
+- Note:
+  - Her iki dosya da 5MB uzunluğundaysa, her birinin iletilmesi 24 dakika sürer
+  - ANCAK ikinci dosya sadece 10 KB uzunluğundaysa, sadece 2.8 saniyede iletilirken, 5MB dosya hala yaklaşık 12 dakika sürer
+
+# Time-division multiplexing (Zaman bölmeli çoğullama)
+
+- Verileri küçük paketlere bölmek zaman bölmeli çoğullamaya izin verir
+- Her paket kaynağı terk eder ve çoklayıcı aracılığıyla paylaşılan iletişim kanalına geçirilir
+- Hedefte, paket bir çoğullama çözücüden hedefe geçirilir
+
+# Packets and frames (Paketler ve çerçeveler)
+
+- Paket, küçük bir veri bloğunu ifade eden `` genel '' bir terimdir
+- Her donanım teknolojisi farklı paket formatı kullanır
+- Çerçeve veya donanım çerçevesi, belirli bir donanım teknolojisindeki belirli bir biçimdeki bir paketi belirtir
+
+# Frame formats (Çerçeve formatları)
+
+- Çerçevenin başlangıcını ve sonunu gösteren veriler için standart bir biçim tanımlamanız gerekir
+- Verileri `` çerçevelemek '' için kullanılan başlık ve fragman
+
+# Çerçeveleme standardını tanımlama
+
+- Çerçeveleme için kullanılmayan iki veri değeri seçebilir
+- Örneğin, veriler yazdırılabilir ASCII ile sınırlıysa,
+  - ``start of header'' (soh)
+  - ``end of text'' (eot)
+- Bilgisayar gönderme önce soh, sonra veri gönderir, sonunda eot
+- Bilgisayarı almak soh yorumlar ve soh, veri tamponda depolar ve eot yorum ve atar
+
+<center><image src="./image/framestandart.png" witdh="300" height="300"></center>
+
+# Framing in practice (Uygulamada çerçeveleme)
+
+- Ekstra ek yüke neden olur: soh ve eot iletmek zaman alır, ancak veri taşımaz
+- Aktarım sorunlarını giderir:
+  - Eksik eot, bilgisayarın gönderilmesinin kilitlendiğini gösterir
+  - Soh eksik mesajın başlangıcında bilgisayarın alındığını gösterir
+  - Bozuk çerçeve atıldı
+
+# Transmitting arbitrary data (Rasgele veriler iletme)
+
+- Sistemin çerçeveleme için iki özel karakter ayırmayı göze alamayacağını varsayalım
+- Keyfi 8 bit ikili veri iletme
+- Verinin bir parçası olarak soh ve eot, çerçeveleme verileri olarak yanlış yorumlanacak
+- Gönderen ve alıcı, net iletim için özel karakterleri kodlamayı kabul etmelidir
+
+# Data stuffing (Veri doldurma)
+
+- Bit doldurma ve bayt doldurma, ayrılmış baytları kodlamak için ekstra veri eklemek için iki tekniktir
+- Bayt doldurma, ayrılmış her baytı iki kaydedilmemiş bayta çevirir
+
+-Örneğin, önek olarak esc, ardından soh için x, eot için y ve esc için z kullanabilirsiniz:
+
+# Byte stuffing (Bayt doldurma)
+
+- Gönderen her ayrılmış baytı uygun kodlama bayt çiftine çevirir
+- Alıcı bayt çiftlerini yorumlar ve kodlanmış baytı tamponda saklar
+- Veriler hala soh ve eot tarafından çerçeveleniyor
+
+# İletim hataları
+
+- Harici elektromanyetik sinyaller yanlış veri iletimine neden olabilir
+  - Veriler yanlış alınabilir
+  - Veriler kaybolabilir
+  - İstenmeyen veriler oluşturulabilir
+- Bu sorunlardan herhangi birine iletim hataları denir
+
+# Hata algılama ve düzeltme
+
+- Hata algılama: Yanlış verilerin algılanabilmesi ve reddedilebilmesi için ek bilgiler gönderin
+- Hata düzeltme: yanlış verilerin düzeltilebilmesi ve kabul edilebilmesi için ek bilgiler gönderin
+
+# Eşlik kontrolü
+
+- Eşlik, veri öğesinde 1 olarak ayarlanan bit sayısını ifade eder
+  - Çift parite - çift sayısı 1
+  - Tek parite - tek sayıda bit 1
+- Bir parite biti, bir veri öğesiyle iletilen ekstra bir bittir, elde edilen bitleri eşit veya tek parite vermeyi seçer
+  - Eşlik - veri: 10010001, eşlik biti 1
+  - Tek parite - veri: 10010111, parite bit 0
+
+# Eşlik ve hata algılama
+
+- Parazit veya başka bir parazit hata verirse, verilerdeki bitlerden biri 1'den 0'a veya 0'dan 1'e değiştirilir
+- Ortaya çıkan bitlerin paritesi yanlış olacak
+  - Orijinal veriler ve eşlik: 10010001 + 1 (çift eşlik)
+  - Hatalı veri: 10110001 + 1 (tek parite)
+- Verici ve alıcı hangi paritenin kullanılacağına katılıyor
+- Alıcı, yanlış eşlikli verilerde hata tespit ediyor
+
+# Eşlik denetimindeki sınırlamalar
+
+- Eşlik yalnızca tek sayıda biti değiştiren hataları algılayabilir
+  - Orijinal veriler ve eşlik: 10010001 + 1 (çift eşlik)
+  - Hatalı veri: 10110011 + 1 (çift parite!)
+- Eşlik genellikle tek bitlik hataları yakalamak için kullanılır
+
+# Alternatif hata algılama şemaları
+
+- Birçok alternatif şema var
+  - Çok bitli hataları algılama
+  - Gereksiz bilgilerle hataları düzeltin
+- Checksum ve CRC yaygın olarak kullanılan iki tekniktir
+
+# Checksums
+
+- Tamsayı dizisi olarak değerlendirilen iletideki verilerin toplamı
+- 8, 16 veya 32 bit tamsayı olabilir
+- Genellikle 1s-tamamlayıcı aritmetik kullanın
+- Örnek - 1s tamamlayıcı aritmetiği olan 16 bit sağlama toplamı
+
+# Implementing checksum computation (Uygulama)
+
+- Yapması kolay - yalnızca ek kullanır
+- 16-bit sağlama toplamının en hızlı uygulamaları 32-bit aritmetik kullanır ve sonunda taşıma ekler
+- Döngüyü ve benzer optimizasyonları kaldırarak hesaplamayı da hızlandırabilir
+
+# Limitations to checksums (sınırlamarı)
+
+- Tüm hataları yakalayamayabilir
+
+# Cyclic redundancy checks (CRC)
+
+- Mesajdaki verileri bir polinomun katsayıları olarak düşünün
+- Bilinen bir polinom tarafından belirlenen bu katsayıyı bölün
+- Kalanı CRC olarak ilet
+  - İyi hata algılama özellikleri
+  - Donanımda kolay uygulama
+
+# Hata tespiti ve çerçeveler
+
+- Her çerçeve için tipik olarak hata tespiti yapılır
+- Çerçevedeki hata genellikle alıcının çerçeveyi atmasına neden olur
+- Örnek - Çerçevedeki verilerde hesaplanan çerçevenin sonunda gönderilen CRC
+
+# Özet
+
+- Bilgisayar ağları verileri paketlere böler
+  - Kaynak Paylaşımı
+  - Adil tahsis
+- Donanım çerçeveleri belirli bir donanım ağı teknolojisine özeldir
+- Her karenin, karenin başlangıcını ve sonunu tanımlayan belirli bir biçimi vardır
+- Hata algılama ve düzeltme, iletim hatalarını tanımlamak ve izole etmek için kullanılır
