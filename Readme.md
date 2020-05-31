@@ -743,3 +743,443 @@
 - Donanım çerçeveleri belirli bir donanım ağı teknolojisine özeldir
 - Her karenin, karenin başlangıcını ve sonunu tanımlayan belirli bir biçimi vardır
 - Hata algılama ve düzeltme, iletim hatalarını tanımlamak ve izole etmek için kullanılır
+
+# Doğrudan noktadan noktaya iletişim
+
+- Her biri tam olarak iki bilgisayarı bağlayan iletişim kanallarıyla bağlanan bilgisayarlar
+- Kafes veya noktadan noktaya ağ oluşturur
+- İletişim donanımında, paket formatlarında vb. Esneklik sağlar.
+- İletişim kanalı paylaşılmadığından güvenlik ve gizlilik sağlar
+
+# Noktadan noktaya ağdaki bağlantılar
+
+- Kablo sayısı bilgisayar sayısının karesi olarak büyüyor
+- N bilgisayar için:
+- Connections = (n2 - n)/2
+- Binalar arasındaki bağlantılar engelleyici olabilir
+- Yeni bir bilgisayar eklemek için N - 1 yeni bağlantı gerekir
+
+# İletişim kanallarının sayısının azaltılması
+
+- LAN'lar 1960'ların sonunda ve 1970'lerin başında gelişti
+- Anahtar fikir - bağlantıları birçok bilgisayar arasında paylaşarak bağlantı sayısını azaltın
+  - Bilgisayarlar sırayla - TDM
+  - Senkronizasyon kullanımı için teknikler içermelidir
+
+# LAN teknolojilerinin büyümesi
+
+- LAN teknolojileri, bağlantı sayısını azaltarak maliyeti düşürür
+- Ancak ... bağlı bilgisayarlar paylaşılan bağlantı kullanımı için rekabet eder
+- Yerel iletişim neredeyse tamamen LAN
+- Uzun mesafe neredeyse sadece noktadan noktaya
+  - SMDS
+  - ATM
+
+# Locality of reference (Referansın bulunduğu yer)
+
+- Referans yerellik ilkesi, bilgisayar iletişim modellerini tahmin etmeye yardımcı olur
+  - Konumsal (veya fiziksel) referans konum: Yakınlardaki diğer bilgisayarlarla iletişim kurması muhtemel bilgisayarlar
+  - Geçici referans konumu: Bilgisayarların aynı bilgisayarlarla tekrar tekrar iletişim kurması muhtemeldir
+- Böylece - LAN'lar uzamsal referans konumu nedeniyle etkilidir ve geçici referans konumu, hangi bilgisayarların LAN üzerinde olması gerektiği konusunda fikir verebilir.
+
+# LAN topolojileri
+
+- Ağlar şekle göre sınıflandırılabilir
+  - Star
+  - Ring
+  - Bus
+
+# Start Topology (Yıldız topolojisi)
+
+- Merkezi bir noktaya bağlı tüm bilgisayarlar
+
+<center><image src="./image/star.png" witdh="300" height="300"></center>
+
+- Yıldızın merkezine bazen bir hub denir
+
+# Uygulamada yıldız topolojisi
+
+- Önceki diyagram idealize edilmiştir; genellikle, bağlantı kabloları bilgisayarlara paralel çalışır:
+
+<center><image src="./image/staruygulama.png" witdh="300" height="300"></center>
+
+# Ring topology (Halka topolojisi)
+
+- Kapalı bir döngüde bağlı bilgisayarlar
+- Birincisi verileri ikinciye, ikincisi verileri üçüncüye geçirir, vb.
+- Uygulamada, bilgisayardan halkaya kısa bir bağlantı kablosu vardır
+- Halka bağlantıları, ofisdeki sokete bağlantı kablosu ile geçmiş ofislerden geçebilir:
+
+<center><image src="./image/ring.png" witdh="300" height="300"></center>
+
+# Bus topology (Otobüs topology)
+
+- Tek kablo tüm bilgisayarları bağlar
+- Her bilgisayarda paylaşılan kablo konektörü
+- Bilgisayarların eşitleme yapması ve aynı anda yalnızca bir bilgisayarın iletimine izin vermesi gerekir
+
+<center><image src="./image/bus.png" witdh="300" height="300"></center>
+
+# Neden çoklu topolojiler?
+
+- Her birinin avantajları ve dezavantajları vardır
+- Ring kolaylığı senkronizasyonu; herhangi bir kablo kesilirse devre dışı bırakılabilir
+- Star yönetmek daha kolay ve daha sağlam; daha fazla kablo gerektirir
+- Bus daha az kablo gerektirir; kablo kesilirse devre dışı bırakılabilir
+- Bucknell üçünü de kullandı; şimdi neredeyse tamamen yıldız topolojisi
+- Endüstri, en yaygın şekilde kullanılan yıldız topolojisine yerleşiyor
+
+# Ethernet
+
+- Yaygın olarak kullanılan LAN teknolojisi
+  - 1970'lerde Xerox PARC'da (Palo Alto Araştırma Merkezi) icat edildi
+  - Xerox, Intel ve Digital tarafından standart olarak tanımlanmıştır - DIX standardı
+  - Artık IEEE tarafından yönetilen standart - formatları, gerilimleri, kablo uzunluklarını, .
+- Bus topolojisi kullanır
+  - Tek koaksiyel kablo - eter
+  - Birden çok bilgisayar bağlanır
+- Bir Ethernet kablosuna bazen segment adı verilir
+  - 500 metre uzunluğunda
+  - Bağlantılar arasındaki minimum ayrım 3 metredir
+
+# Ethernet hızları
+
+- Başlangıçta 3Mbps
+- Mevcut standart is 10Mbps
+- Hızlı Ethernet hızında çalışınca 100Mbps
+
+# Ethernet operation (Ethernet işlemi)
+
+- Bir seferde bir bilgisayar iletir
+- Sinyal, segment uzunluğu boyunca vericiden her iki yönde yayılan modüle edilmiş bir taşıyıcıdır
+
+<center><image src="./image/ethernetoperation.png" witdh="300" height="300"></center>
+
+# CSMA
+
+- Bilgisayarlar eterde iletim yaptığında merkezi kontrol yönetimi yok
+- Ethernet, bağlı birden çok bilgisayar arasındaki iletimi koordine etmek için CSMA'yı kullanır
+- Çoklu Erişimli Taşıyıcı Anlam
+  - Çoklu erişim: Birden fazla bilgisayar bağlı ve herhangi bir verici olabilir
+  - Taşıyıcı anlamda: İletimden önce taşıyıcı için test eteri iletmek isteyen bilgisayar
+
+# Çarpışma algılama - CD
+
+- CSMA ile bile, iki bilgisayar aynı anda iletim yapabilir
+  - Her ikisi de eteri aynı anda kontrol eder, boşta bulur ve iletmeye başlar
+  - İletim penceresi eterdeki yayılma hızına bağlıdır
+- İki bilgisayardan gelen sinyaller birbirini etkileyecektir
+- Çakışan karelere çarpışma denir
+  - Donanıma zarar vermez
+- Her iki çerçeveden gelen veriler bozuk
+
+# Ethernet CD
+
+- Ethernet arayüzleri iletim tespiti için donanım içerir
+  - Giden sinyali izleyin
+  - Bozuk sinyal bir çarpışma olarak yorumlanır
+- Çarpışma algılandıktan sonra bilgisayar iletimi durdurur
+- Ethernet, aktarımları koordine etmek için CSMA / CD kullanır
+
+# Recovery from collision (Çarpışmadan kurtarma)
+
+- Bir çarpışmayı algılayan bilgisayar diğer tüm arabirimleri çarpışmayı algılamaya zorlamak için özel sinyal gönderir
+- Bilgisayar daha sonra iletimden önce eterin boşta olmasını bekler
+  - Her iki bilgisayar da aynı süre beklerse, çerçeveler tekrar çarpışır
+  - Standart maksimum gecikmeyi belirtir ve her iki bilgisayar da maksimumdan daha az rastgele gecikme seçer
+- Bekledikten sonra bilgisayarlar sonraki çarpışmayı önlemek için taşıyıcı hissi kullanır
+  - Daha kısa gecikmeli bilgisayar ilk önce
+  - Diğer bilgisayarlar önce iletim yapabilir
+
+# Exponential backoff (Üstel geri çekilme)
+
+- Rastgele gecikmelerde bile, çarpışmalar meydana gelebilir
+- Özellikle yoğun segmentlerde
+- Bilgisayarlar sonraki her çarpışmada iki kat gecikme
+- Çarpışma sırası olasılığını azaltır
+
+# Wireless LAN (Kablosuz LAN)
+
+- 900MHz'de radyo sinyalleri kullanın
+- 2Mbps veri hızı
+- Paylaşılan ortam - koaksiyel yerine radyo
+
+# Kablosuz ile sınırlı bağlantı
+
+- Kablolu LAN'ın aksine, tüm katılımcılar birbirine erişemeyebilir
+  - Düşük sinyal gücü
+  - Yayılma duvarlar vb. Tarafından engellendi.
+- CD'ye bağlı olamaz; tüm katılımcılar duyamaz
+
+# CSMA/CA
+
+- Kablosuz, çarpışma algılaması yerine çarpışmadan kaçınma kullanır
+  - Bilgisayarın gönderilmesi alıcıya çok kısa mesaj gönderir
+  - Alıcı, verici için kısa mesaj ayırma yuvası ile yanıt verir
+- Alıcıdan gelen yanıt yayınlanır, böylece tüm potansiyel vericiler rezervasyon alır
+
+<center><image src="./image/csma.png" witdh="300" height="300"></center>
+
+# Collisions (Çarpışmalar)
+
+- Alıcı eşzamanlı istekler alabilir
+  - Alıcıda çarpışma sonuçları
+  - Her iki istek de kaybolur
+  - Her iki verici de rezervasyon almaz; hem geri çekmeyi kullan hem de yeniden dene
+- Alıcı yakın aralıklı istekler alabilir
+  - Birini seçer
+  - Seçilen verici mesaj gönderir
+  - Seçili olmayan verici geri çekmeyi ve yeniden denemeyi kullanır
+
+# LocalTalk
+
+- Veri yolu topolojisini kullanan LAN teknolojisi
+- Tüm Macintosh bilgisayarlarda bulunan arayüz
+- Nispeten düşük hız - 230.4Kbps
+- Düşük maliyetli (Macintosh ile `` ücretsiz ''); kurulumu ve bağlanması kolay
+- CSMA / CD kullanır
+
+# Token ring
+
+- Halka topolojisi kullanan birçok LAN teknolojisi, halkaya senkronize erişim için belirteç geçişi kullanır
+- Halkanın kendisi tek bir paylaşılan iletişim aracı olarak ele alınır
+- Bitler vericiden, diğer bilgisayarların yanından geçer ve hedefe göre kopyalanır
+- Donanım, bağlı bilgisayar kapalı olsa bile belirteci geçirecek şekilde tasarlanmalıdır
+
+<center><image src="./image/ringexample.png" witdh="300" height="300"></center>
+
+# Token kullanılması
+
+- Bir bilgisayar iletmek istediğinde, token bekler
+- İletimden sonra bilgisayar, token halkaya iletir
+- İletime hazır bir sonraki bilgisayar belirteci alır ve sonra iletir
+
+# Token and synchronization
+
+- Yalnızca bir token olduğu için, aynı anda yalnızca bir bilgisayar iletilir
+  - Token, verilerde görünmeyen kısa, ayrılmış bir çerçevedir
+  - Donanım kaybolursa belirteci yeniden oluşturmalıdır
+- Token, bilgisayara bir kare gönderme izni verir
+
+  - Her şey iletime hazırsa, `` round-robin '' erişimini zorlar
+  - Hiçbiri iletilmeye hazır değilse, token halka etrafında dolaşır
+
+# IBM Token ring
+
+- Çok yaygın olarak kullanılır
+- Başlangıçta 4mbps, şimdi 16Mbps
+- Bilgisayar ve halka arabirimi arasında özel bağlantı kablosu kullanır
+
+# FDDI (Fiber Distributed Data Interconnect)
+
+- İstasyonlar arasında fiber optik kullanır
+- 100Mbps hızında veri iletir
+- İki eş merkezli halka oluşturmak için lif çiftlerini kullanır
+
+# FDDI ve güvenilirlik
+
+- FDDI, verilerin zıt yönlerde aktığı tersine dönen halkalar kullanır
+- Fiber veya istasyon arızası durumunda, kalan istasyonlar geri döner ve verileri yedek halka üzerinden yeniden yönlendirir
+- Tüm istasyonlar veri halkasını izleyerek döngüyü otomatik olarak yapılandırır
+
+<center><image src="./image/fddi.png" witdh="300" height="300"></center>
+
+# ATM - Star network
+
+- Asenkron Aktarım Modu teknolojisi, bilgisayarların bağlanabileceği elektronik paket anahtarlarından oluşur
+- ATM, bilgisayarların yıldız topolojisinde bağlandığı hub'ı oluşturur
+- Bilgisayarlar noktadan noktaya bağlantı alır - vericiden gelen veriler doğrudan hub anahtarları aracılığıyla hedefe yönlendirilir
+
+<center><image src="./image/atm.png" witdh="300" height="300"></center>
+
+# ATM detay
+
+- 100Mbps üzerinde veri iletir
+- Bilgisayarı geçiş yapmak için fiber optik kullanır
+- Her bağlantı iki fiber içerir
+
+<center><image src="./image/atmdetay.png" witdh="300" height="300"></center>
+
+# Özet
+
+- LAN teknolojileri, kısa mesafelerde birden fazla bilgisayarı birbirine bağlamak için paylaşılan iletişim ortamlarını kullanır
+- Bilgisayarı iletmek için özel iletişim ortamı vardır; bilgisayarlar aktarımı senkronize etmeli ve kullanılabilir kapasiteyi paylaşmalıdır
+- LAN topologies:
+  - Star
+  - Ring
+  - Bus
+- LAN technologies
+  - Ethernet
+  - Wireless
+  - LocalTalk
+  - IBM Token Ring
+  - FDDI
+  - ATM
+
+# Introduction
+
+- LAN teknolojisiyle ilgili önceki bölümde bilgisayarlar arasında bağlantı sağlama teknikleri açıklanmıştır
+- LAN ortamından tek ve belirli hedef bilgisayara mesaj iletmek için teknik tasarlanması gerekiyor
+- Bilgisayar gönderme, bir çerçevenin amaçlanan hedefini tanımlamak için bir donanım adresi kullanır
+- Bilgisayar gönderme ayrıca çerçevede taşınan veri türünü de tanımlar
+
+# Specifying a destination (Bir varış yerinin belirtilmesi)
+
+- Paylaşılan bir ağ üzerinden gönderilen veriler bağlı tüm istasyonlara ulaşır - tüm LAN topolojileri için
+- Arabirim donanımı çerçevenin teslimatını algılar ve çerçeveyi ortamdan çıkarır
+- Ancak ... çoğu uygulama, verilerin başka bir bilgisayardaki belirli bir uygulamaya teslim edilmesini ister - tüm bilgisayarlar değil
+
+# Hardware addressing (Donanım adresleme)
+
+- Çoğu ağ teknolojisinin ağdaki istasyonları tanımlayan bir donanım adresleme düzeni vardır
+- Her istasyona sayısal bir donanım adresi veya fiziksel adres atanır
+- Gönderen, iletilen her kareye donanım adresi ekler
+- Yalnızca çerçevede tanımlanan istasyon çerçevenin bir kopyasını alır
+- Çoğu LAN teknolojisi, gönderenin donanım adresini çerçevede de içerir
+
+# LAN donanımı ve paket filtreleme
+
+- LAN donanımı ve bilgisayarın organizasyonu hakkında biraz ayrıntı
+
+<center><image src="./image/LanHardware.png" witdh="300" height="300"></center>
+
+- LAN arayüzü, çerçeve iletim ve alımının tüm ayrıntılarını işler
+  - Giden karelere donanım adresleri, hata algılama kodları vb. Ekler
+  - Çerçeve verilerini doğrudan ana bellekten kopyalamak için DMA'yı kullanabilir
+  - Aktarım sırasında erişim kurallarına (ör. CSMA / CD) uyar
+  - Gelen karelerde hata algılama kodlarını kontrol eder
+  - Verileri doğrudan ana belleğe kopyalamak için DMA'yı kullanabilir
+  - Gelen karelerde hedef adresi kontrol eder
+  - Gelen karedeki hedef adres yerel istasyonun adresiyle eşleşiyorsa, çerçevenin bir kopyası ekli bilgisayara geçirilir
+  - Yerel bilgisayara yönelik olmayan çerçeveler yok sayılır ve yerel bilgisayarı hiçbir şekilde etkilemez
+
+# Donanım adreslerinin biçimi
+
+- Sayısal değer
+- Belirli ağ teknolojisi için seçilen boyut
+- Uzunluk bir ila 6 bayttır
+
+# Donanım adresleri atama
+
+- Donanım adresleri bir LAN'da benzersiz olmalıdır
+- Bu adres nasıl atanabilir ve benzersizlikten kim sorumludur?
+- Static (Statik):
+  - Donanım üreticisi her arabirime kalıcı adres atar
+  - Üretici, her arabirimin benzersiz bir adrese sahip olduğundan emin olmalıdır
+- Dynamic (Dinamik):
+  - Adres, arabirimdeki anahtarlar veya atlama kabloları veya yazılım aracılığıyla son kullanıcı tarafından ayarlanabilir
+  - Sistem yöneticileri çakışmayı önlemek için koordine etmelidir
+- Automatic (Otomatik):
+  - Arabirim her açıldığında donanım adresini otomatik olarak atar
+  - Otomatik plan çakışmaları önlemek için güvenilir olmalıdır
+
+# Broadcasting (Yayın)
+
+- Bazı uygulamalar LAN üzerindeki tüm istasyonlara mesaj yayınlamak ister
+- Paylaşılan iletişim kanalı yayını verimli hale getirebilir - mesaj tüm istasyonlara iletilir
+- Tüm istasyonlar tarafından yakalanan yayın mesajlarını tanımlamak için kullanılan özel yayın adresi
+
+# Paket içeriklerini belirleme
+
+- Hedef, çerçeve verilerinin nasıl yorumlanacağı hakkında bir ipucu almalıdır
+- Kullanabilirsiniz:
+  - Açık çerçeve türü: Çerçeveye dahil edilen tanımlayıcı değer, dahil edilen verilerin türünü açıklar
+  - Örtük çerçeve türü: Alıcı türü çerçeve verilerinden çıkarmalıdır
+
+# Headers and frame formats (Üstbilgiler ve çerçeve biçimleri)
+
+- LAN teknolojisi standartları her teknoloji için çerçeve formatını tanımlar
+- Tüm çağdaş standartlar aşağıdaki genel formatı kullanır:
+
+<center><image src="./image/headersframe.png" witdh="300" height="300"></center>
+
+- Çerçeve üstbilgisinde adres ve diğer tanımlayıcı bilgiler var
+- Genellikle sabit boyut ve konuma sahip alanlardaki bilgiler
+- Veri alanının boyutu değişebilir
+
+# Frame format (Örnek çerçeve biçimi)
+
+<center><image src="./image/frameformat.png" witdh="300" height="300"></center>
+
+| Alan         | Hedef                       |
+| ------------ | --------------------------- |
+| Preamble     | Alıcı senkronizasyonu       |
+| Dest. addr.  | Hedeflenen alıcıyı tanımlar |
+| Source addr. | Gönderenin donanım adresi   |
+| Frame type   | Çerçevede taşınan veri türü |
+| Data         | Çerçeve yükü                |
+| CRC          | 32 bit CRC kode             |
+
+# Ethernet fields (Ethernet alanları)
+
+- Preamble ve CRC sıklıkla gösterilmez
+- Tüm 1'lerin hedef adresi yayın adresidir
+- Çerçeve türü alanı için özel değerler ayrılmıştır:
+
+<center><image src="./image/ethernetfields.png" witdh="300" height="300"></center>
+
+# Frames without type fields (Yazım alanı olmayan çerçeveler)
+
+- Bazı LAN teknolojileri bir tip alanı içermez
+- Gönderen ve alıcı yorumlama konusunda anlaşabilir
+  - Tek bir veri biçiminde anlaşın ve yalnızca bu biçimi kullanın
+    - LAN'ı bir veri türüyle sınırlar
+    - LAN üzerindeki tüm bilgisayarlar tek bir biçim kullanmalıdır
+  - Veri alanının veri biçiminin ilk birkaç baytında kodlanmasını kabul edin
+
+# Veri türünü kodlama
+
+- Veri türünü kodlamak için veri alanı kullanımının gösterimi
+
+<center><image src="./image/datacode.png" witdh="300" height="300"></center>
+
+- Birlikte çalışabilirliği sağlamak için, kodlama alanının biçimi üzerinde evrensel olarak anlaşılmalıdır
+- Standart gövde tarafından belirlenen biçim
+
+# IEEE 802.2 LLC
+
+- IEEE 802.2 standardında Mantıksal Bağlantı Denetimi (LLC) Alt Ağ Bağlantı Noktası (SNAP) başlığı bulunur
+- SNAP / LLC formatı yaygın olarak kullanılmaktadır; ör. Ethernet ile
+- LLC bölümü izlenecek SNAP alanını gösterir
+- OUI (Organizasyonel Olarak Benzersiz Tanımlayıcı) Ethernet spesifikasyonu organizasyonunu tanımlar
+- Ethernet'te olduğu gibi yorumlanan TYPE alanı (bu durumda IP)
+
+# Unknown types (Bilinmeyen tip)
+
+- Her iki kodlama biçimi için, bazı bilgisayarlar bazı türlerdeki çerçeveleri kabul etmeye hazır olmayabilir
+  - Protokol türü kurulu değil
+  - Yeni tanımlanmış tip
+- Alıcı bilgisayar, tür alanını inceler ve bilinmeyen türdeki kareleri atar
+
+# Network analyzers (Ağ analizörleri)
+
+- Bir ağın performansını incelemek veya hata ayıklamak için bir ağ analizörü veya ağ izleyicisi veya `` ağ dinleyicisi '' kullanılır
+- Kapasite kullanımı, kare boyutunun dağılımı, çarpışma oranı veya token dolaşım süresi gibi istatistikleri rapor edebilir
+- Paket iletimlerini ve değişimlerini anlamak ve hatalarını ayıklamak için belirli çerçeveleri kaydedebilir ve görüntüleyebilir
+
+# Operation of a network analyzer (Bir ağ analizörünün çalışması)
+
+- Temel fikir, tüm çerçeveleri alan bir ağ arayüzüne sahip bir bilgisayardır
+- Bazen karışık mod denir
+- Birçok masaüstü bilgisayarda karışık mod için yapılandırılabilen arayüz bulunur
+  - Yazılım ile birlikte, bilgisayar LAN üzerindeki herhangi bir çerçeveyi inceleyebilir
+  - LAN üzerinden iletişimin özel olduğu garanti edilmez!
+- Bilgisayar LAN üzerindeki çerçeveleri alır ve görüntüler (ancak yanıt vermez)
+
+# Filtering incoming frames (Gelen kareleri filtreleme)
+
+- Analizör çerçeveleri filtrelemek ve işlemek için yapılandırılabilir
+  - Belirli bir tür veya boyuttaki kareleri sayma
+  - Yalnızca belirli bilgisayarlardan veya bilgisayarlara kareleri görüntüleme
+  - Genel olarak, herhangi bir alanın değeriyle eşleşecek ve yalnızca filtre spesifikasyonunu karşılayan kareleri yakalayacak şekilde yapılandırılabilir
+- Analizör, belirli dönemlerde çalışan toplamları hesaplayarak gerçek zamanlı performans görüntüleyebilir
+
+# Özet
+
+- LAN teknolojileri, paylaşılan iletişim kanalı üzerinden gönderilen çerçevelerin hedefini belirlemek için donanım adreslerini kullanır
+- Her LAN teknolojisi kendi donanım biçimini tanımlar
+- Adresler statik olarak atanabilir, yapılandırılabilir veya otomatik olarak atanabilir
+- Her istasyonun LAN segmentinde benzersiz bir adresi olmalıdır
+- Çerçeveler, hedef, kaynak ve çerçeve türü gibi diğer bilgiler için alanları içeren bir başlık içerir
+- Çerçeve türü, çerçeve verilerinin nasıl yorumlanacağını tanımlar
+- Ağ analizörü tüm çerçeveleri alabilir ve istatistikleri görüntüleyebilir veya hata ayıklama sorunlarına yardımcı olabilir
