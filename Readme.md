@@ -1512,14 +1512,14 @@
   - Yayılan ağaç hesaplamasını gerçekleştirir
   - Köprünün bir döngü oluşturup oluşturmayacağını belirler
 
-# Switching 
+# Switching
 
 - Her bağlantı noktası için etkili bir şekilde ayrı bir LAN segmenti
 - Hub'a benzer - hub tüm portlar arasında tek segment paylaşır
 - Anahtarlama ile, birden fazla istasyon aynı anda iletim yapabilir
 - Çok daha yüksek toplam bant genişliği sağlar
 
-# Switches and hubs 
+# Switches and hubs
 
 - Anahtarlar port başına daha pahalıdır
 - Bazı istasyonlar için hub ve diğerleri için hub kullanmak ekonomik olarak daha anlamlı olabilir
@@ -1535,3 +1535,475 @@
   - Yerel iletim için LAN segmentlerinin aynı anda kullanılmasına izin verir
   - Tüm yayın ve çok noktaya yayın paketlerini iletir
 - Anahtarlar, ayrı LAN segmentlerini simüle ederek her bağlantı noktasına tam LAN hızı sağlar
+
+# Introduction
+
+- Önceki teknolojiler "kısa" mesafeleri kapsar
+- Kısa mesafelerde uzayabilir
+- Daha uzun mesafeleri kat etmek gerekiyor - örneğin Bucknell'den New York'a
+- Bu teknolojiyi WAN - Geniş Alan Ağı olarak adlandıracak
+- İki kategori:
+  - Ağlar arasında uzun mesafe
+  - "Yerel döngü"
+
+# Dijital telefon
+
+- Telefon sistemi uzun mesafeler kat ediyor
+- Dijital telefon geliştirilmiş uzun mesafe servisi:
+  - Daha iyi kalite
+  - Diğer bağlantılar
+
+# Digitizing voice (Sesi dijitalleştirmek)
+
+- Sorun: Analog ses sinyalini dijital veri olarak kodlayın
+- Çözüm:
+  - Periyodik aralıklarla örnek ses sinyali
+  - A'dan D'ye dönüştürücü kullanarak dijitale dönüştürün
+  - Kablo üzerinden veri gönderme
+  - D-to-A dönüştürücüyü kullanarak sese yeniden dönüştürme
+
+# Sampling parameters (Örnekleme parametreleri)
+
+- 4000Hz'e kadar sinyal taşımak istiyorum
+- 8000Hz örnekleme hızını seçin
+- Her örnek 0-255 (8 bit) aralığındadır
+- Darbe Kodu Modülasyonu (PCM) adı verilen standart
+
+# Synchronous communication (Senkron iletişim)
+
+- Sese dönüştürmek için verinin "zamanında" kullanılabilir olması gerekir
+- Dijital telefon sistemleri senkronize veri iletimi için saat ölçümünü kullanır
+- Trafik arttıkça örnekler gecikmiyor
+
+# Using digital telephony for data delivery (Veri dağıtımı için dijital telefon kullanma)
+
+- Böylece, dijital telefon senkron veri iletimini gerçekleştirebilir
+- Bunu veri dağıtımı için kullanabilir miyiz?
+- Ethernet çerçevesi! = 8 bit PCM senkronize
+- Biçimleri dönüştürmek gerekiyor.
+
+# Conversion for digital circuits
+
+- Veri dağıtımı için dijital telefonu kullanmak için:
+  - Siteler arasında noktadan noktaya dijital devre kiralama
+  - Her iki uçta yerel ve PCM formatları arasında dönüştürme
+- Her iki uçta bir Veri Hizmet Birimi / Kanal Hizmet Birimi (DSU / CSU) kullanın
+  - CSU - kontrol fonksiyonlarını yönetir
+    - DSU - verileri dönüştürür
+
+# DSU/CSU Kullanımı
+
+<center><image src="./image/dsucsu.png" witdh="300" height="300"></center>
+
+# Telephone standards (Telefon standartları)
+
+| Name | Bit Rate    | Voice Circuits |
+| ---- | ----------- | -------------- |
+| -    | 0.064 Mbps  | 1              |
+| T1   | 1.544 Mbps  | 24             |
+| T2   | 6.312 Mbps  | 96             |
+| T3   | 44.736 Mbps | 672            |
+
+# Intermediate capacity (Ara kapasite)
+
+- Fiyat doğrusal olarak hızlanmıyor
+- T3 için \\\\\\\\\$\\\\\\\\\$ <28 için 28 \\\\\\\\\* T1
+  ... ancak ihtiyacınız olan tek şey 9 Mbps ise, T3 için \\\\\\\\\$\\\\\\\\\$> 6 \\\\\\\\\\* T1 için \\\\\\\\\\$\$
+- Çözüm: Birden fazla T1 hattını ters çoklayıcı ile birleştirin
+
+<center><image src="./image/intermediate.png" witdh="300" height="300"></center>
+
+# Higher capacity circuits (Daha yüksek kapasiteli devreler)
+
+| Standard name | Optical name | Bit Rate       | Voice Circuits |
+| ------------- | ------------ | -------------- | -------------- |
+| STS-1         | OC-1         | 51.840 Mbps    | 810            |
+| STS-3         | OC-3         | 155.520 Mbps   | 2,430          |
+| STS-12        | OC-12        | 622.080 Mbps   | 9,720          |
+| STS-24        | OC-24        | 1,244.160 Mbps | 19,440         |
+| STS-48        | OC-48        | 2,488.320 Mbps | 38,880         |
+
+# About the terminology (Terminoloji hakkında)
+
+- T standartları temel bit hızını, Dijital Sinyal Seviyesi standartlarını (DS standartları) tanımlar
+  - Çağrıları çoğaltma
+  - etkili bit hızları
+  - T1 hattı DS-1 hızında veri iletir
+- Senkron Taşıma Sinyali (STS) standartları bakır üzerinden yüksek hızlı bağlantıları tanımlar, Optik Taşıyıcı (OC) standardı fiber içindir
+- C soneki bitiştirilmiş olduğunu gösterir
+  - OC-3 == 51,84 Mbps'de üç OC-1 devresi
+  - OC-3C == bir 155.52 Mbps devre
+
+# SONET
+
+- Senkron Optik Ağ (SONET), yüksek hızlı bağlantıların nasıl kullanılacağını tanımlar
+  - Çerçeveleme: STS-1, çerçeve başına 810 bayt kullanır
+- Kodlama: Her örnek faydalı yükte bir sekizli olarak hareket eder
+
+<center><image src="./image/SONET.png" witdh="300" height="300"></center>
+
+- Veri hızı ile yük değişiklikleri
+  - STS-1 125 mikrosaniyede 6.480 bit iletir (== 810 oktet)
+  - STS-3 125 mikrosaniyede 19.440 bit iletir (== 2.430 oktet)
+
+# Getting to your home (Evinize Ulaşım)
+
+- Yerel döngü telefon ofisinden evinize bağlantıyı tanımlar
+- Bazen POTS (Düz Eski Telefon Hizmeti) olarak adlandırılır
+- Eski altyapı bakırdır
+- Diğer mevcut bağlantılar arasında kablo TV, kablosuz, elektrik
+
+# ISDN
+
+- Mevcut yerel döngü bakırında dijital servis (T serisi gibi) sağlar
+- Üç ayrı devre veya kanal
+  - Her biri 64 Kbps olan iki B kanalı; == 2 ses devresi
+  - Bir D kanalı, 16 Kbps; kontrol
+- Genellikle 2B + D olarak yazılır; Temel Hız Arayüzü (BRI)
+- Yavaş yakalamak
+  - Pahalı
+  - Kullanılan zamana göre ücretlendirme
+  - (Neredeyse) analog modemlerle eşittir
+
+# DSL
+
+- DSL (Dijital Abone Hattı) bir teknoloji ailesidir
+  - Bazen xDSL olarak adlandırılır
+  - Mevcut yerel döngü üzerinden yüksek hızlı dijital hizmet sunar
+- Yaygın bir form ADSL'dir (Asimetrik DSL)
+  - Evden evden daha yüksek hız
+  - İçeri ("yukarı akış") dışarı ("yukarı akış") göre daha fazla bit akışı
+- ADSL maksimum hızları:
+  - 6.144 Mbps akış aşağı
+  - 640 Kb / sn akış yönü
+
+# ADSL teknolojisi
+
+- Mevcut yerel ilmek bakırını kullanır
+- Çoğu yerel döngüde daha yüksek frekanslardan yararlanır
+- POTS için aynı anda kullanılabilir
+
+<center><image src="./image/adsl.png" witdh="300" height="300"></center>
+
+# Adaptive transmission (Uyarlamalı iletim)
+
+- Bireysel yerel döngüler farklı iletim özelliklerine sahiptir
+  - Farklı maksimum frekanslar
+  - Farklı girişim frekansları
+- ADSL FDM kullanıyor
+  - 286 frekans
+  - 255 aşağı akış
+  - 31 yukarı akış
+  - 2 kontrol
+- Her frekans veriyi bağımsız olarak taşır
+  - Tüm frekanslar ses aralığının dışında
+  - Bit hızı her frekansta kaliteye uyum sağlar
+
+# Diğer DSL teknolojileri
+
+- SDSL (Simetrik DSL) frekansları eşit olarak böler
+- HDSL (Yüksek Hızlı DSL), her iki yönde DS1 bit hızı sağlar
+  - Kısa mesafeler
+  - Dört tel
+- VDSL (Çok yüksek bit hızı DSL) 52 Mbps'ye kadar
+  - Çok kısa mesafe
+  - Röle olarak Optik Ağ Birimi (ONU) gerektirir
+
+# Cable modem technologies (Kablo modem teknolojileri)
+
+- Kablo TV zaten evinize yüksek bant genişliği koaksiyelini getiriyor
+- Kablo modemler kablo TV koaksındaki verileri kodlar ve kodunu çözer
+  - Kablo girişli TV merkezinden biri ağa bağlanır
+  - Evden biri bilgisayara bağlanır
+
+# Features of cable modems (Kablo modemlerin özellikleri)
+
+- Bant genişliği tüm kullanıcılar arasında çoklanır
+- Çoklu erişim ortamı; komşunuz verilerinizi görebilir!
+- Tüm kablolu TV koaksiyel tesisleri çift yönlü değildir
+
+# Alternatif
+
+- Satellite
+- "Fiber to the curb"
+
+# Özet
+
+- Siteler arasındaki WAN bağlantıları dijital telefon kullanır
+  - Dijital ses hizmetine dayalı
+  - Çeşitli standart oranlar
+  - DSU / CSU'ya dönüşüm gerektirir
+- Yerel döngü teknolojileri
+  - ISDN
+  - xDSL
+  - Cable modem
+  - Satellite
+  - Fiber to the curb
+
+# LAN ve WAN arasındaki farklar
+
+- Uydu köprüsü LAN'ı uzak mesafelere uzatabilir
+- Yine de keyfi olarak birçok bilgisayarı barındıramıyor
+- WAN, uzun mesafelere ve birçok bilgisayara ölçeklenebilir olmalıdır
+
+# Packet switches (Paket anahtarları)
+
+- Uzun mesafelere veya birçok bilgisayara yayılmak için, ağ paylaşılan ortamı paket anahtarlarıyla değiştirmelidir
+  - Her anahtar, bir paketin tamamını bir bağlantıdan diğerine taşır
+  - Ağ arabirimleri, bellek ve paket anahtarlama işlevine ayrılmış program içeren küçük bir bilgisayar
+
+# Connections to packet switches (Paket anahtarlarına bağlantılar)
+
+- Paket anahtarları bilgisayarlara ve diğer paket anahtarlarına bağlanabilir
+
+<center><image src="./image/packetsswitches.png" witdh="300" height="300"></center>
+
+- Genellikle diğer paket anahtarlarına yüksek hızlı bağlantılar, bilgisayarlara daha düşük hız
+- Teknoloji ayrıntıları istenen hıza bağlıdır
+
+# Packet switches as building blocks (Yapı taşları olarak paket anahtarları)
+
+- Packet switches can be linked together to form WANs
+
+<center><image src="./image/packetsswitchesbuild.png" witdh="300" height="300"></center>
+
+- WAN'ların simetrik olması veya düzenli bağlantıları olması gerekmez
+- Her anahtar bir veya daha fazla başka anahtara ve bir veya daha fazla bilgisayara bağlanabilir
+
+# Store and forward (Mağaza ve ileri)
+
+- Bir bilgisayardan diğerine veri teslimi, depola ve ilet teknolojisi ile gerçekleştirilir
+  - Paket anahtarı gelen paketi saklar
+  - ... ve paketi başka bir anahtara veya bilgisayara iletir
+- Paket anahtarının dahili belleği vardır
+  - Giden bağlantı meşgulse paketi tutabilir
+  - Kuyrukta tutulan her bağlantı için paketler
+
+# Store and forward example (Sakla ve ilet örneği)
+
+<center><image src="./image/storeandforward.png" witdh="300" height="300"></center>
+
+# Physical addressing in a WAN (WAN'da fiziksel adresleme)
+
+- LAN benzer
+  - Paketler halinde aktarılan veriler (çerçevelere eşdeğer)
+  - Her paketin başlıklı biçimi vardır
+  - Paket başlığı, hedef ve kaynak adresleri içerir
+- Birçok WAN, verimlilik için hiyerarşik adresleme kullanır
+  - Adresin bir kısmı hedef anahtarını tanımlar
+  - Adresin diğer kısmı anahtardaki bağlantı noktasını tanımlar
+
+<center><image src="./image/physicaladdres.png" witdh="300" height="300"></center>
+
+# Next-hop forwarding (Sonraki sekmeye iletme)
+
+- Paket anahtarı yönlendirme için giden bağlantıyı seçmelidir
+  - Hedef yerel bilgisayarsa, paket anahtarı bilgisayar bağlantı noktasını sağlar
+  - Hedef başka bir anahtar takılırsa, bu paket anahtarı başka bir anahtara bağlantı yoluyla bir sonraki sekmeye ilerler
+- Paket içindeki hedef adrese dayalı seçim
+
+# Choosing next hop (Bir sonraki sekmeyi seçme)
+
+- Paket anahtarı olası tüm hedefler hakkında tam bilgi tutmaz
+- Sadece bir sonraki sekmeyi koruyor
+- Böylece, her paket için, paket anahtarı tablodaki hedefi arar ve bir sonraki sekmeye bağlantı yoluyla iletir
+
+<center><image src="./image/choosinghop.png" witdh="300" height="300"></center>
+
+# Source independence (Kaynak bağımsızlığı)
+
+- Hedefe bir sonraki atlama, paketin kaynağına bağlı değildir
+- Kaynak bağımsızlığı denir
+- Hızlı, verimli yönlendirme sağlar
+- Paket anahtarının tam bilgiye sahip olması gerekmez, sadece bir sonraki atlama
+- Toplam bilgileri azaltır
+- Dinamik sağlamlığı artırır: Topoloji tüm ağı bildirmeden değişse bile ağ çalışmaya devam edebilir
+
+# Hierarchical address and routing (Hiyerarşik adres ve yönlendirme)
+
+- Yönlendirme işlemine yönlendirme denir
+- Bilgiler yönlendirme tablosunda tutulur
+- Birçok girişin aynı sonraki atlamaya sahip olduğunu unutmayın
+
+<center><image src="./image/choosinghop.png" witdh="300" height="300"></center>
+
+- Özellikle, aynı anahtardaki tüm hedefler aynı sonraki sekmeye sahiptir
+- Böylece, yönlendirme tablosu daraltılabilir:
+
+<center><image src="./image/hierarchicaladdress.png" witdh="300" height="300"></center>
+
+# WAN architecture and capacity (WAN mimarisi ve kapasitesi)
+
+- Daha fazla bilgisayar == daha fazla trafik
+- Daha fazla bağlantı ve paket anahtarı ekleyerek WAN'a kapasite ekleyebilir
+- Paket anahtarlarının bağlı bilgisayarları olması gerekmez
+- İç anahtar - bağlı bilgisayar yok
+- Dış anahtar - bağlı bilgisayarlar
+
+# Routing in a WAN
+
+- Hem iç hem de dış anahtarlar
+  - İletme paketleri
+  - Yönlendirme tablolarına ihtiyaç var
+- Olmalı
+- Universal routing (Evrensel yönlendirme): Olası her hedef için bir sonraki atlama
+- Optimal routes (Optimal rotalar): Tablodaki bir sonraki atlama hedefe giden en kısa yolda olmalıdır
+
+# Modeling a WAN (WAN'ın Modellenmesi)
+
+- Bir grafik kullanın:
+  - Düğüm model anahtarları
+  - Kenarlar, anahtarlar arasındaki doğrudan bağlantıları modeli
+- Bağlı bilgisayarları yok sayarak ağın özünü yakalar
+
+<center><image src="./image/modelwan.png" witdh="300" height="300"></center>
+
+# Route computation with a graph (Bir grafikle rota hesaplaması)
+
+- Kenarları olan yönlendirme tablosunu temsil edebilir
+
+<center><image src="./image/routecomputation.png" witdh="300" height="300"></center>
+
+- Güzergahları bulmak için grafik algoritmaları uygulanabilir
+
+# Redundant routing information (Gereksiz yönlendirme bilgileri)
+
+- Düğüm 1 için yönlendirme tablosundaki bilgilerin çoğaltılmasına dikkat edin
+
+<center><image src="./image/routinginfo.png" witdh="300" height="300"></center>
+
+- Anahtar 1 yalnızca bir giden bağlantıya sahiptir; tüm trafik bu bağlantıdan geçmelidir
+- Bucknell ve Internet için ekstrapolat
+
+# Default routes (Varsayılan routes)
+
+- Yönlendirme tablosu girdilerini varsayılan bir rota ile daraltabilir
+- Hedefin açık bir yönlendirme tablosu girişi yoksa, varsayılan rotayı kullanın:
+
+<center><image src="./image/routinginfo.png" witdh="300" height="300"></center>
+
+- Varsayılan rotanın kullanılması isteğe bağlıdır
+- Bucknell'e ekstrapolate
+
+# Building routing tables (Bina yönlendirme tabloları)
+
+- Yönlendirme tablolarına nasıl bilgi girilir:
+  - Manual entry (Manuel giriş) - başlatma dosyası
+  - Dynamically (Dinamik olarak) - çalışma zamanı arayüzü üzerinden
+- Yönlendirme tablosu bilgileri nasıl hesaplanır:
+  - Static routing (Statik yönlendirme) - önyükleme zamanında
+  - Dynamic routing (Dinamik yönlendirme) - bir program tarafından otomatik güncellemelere izin ver
+- Statik daha basittir; ağ topolojisindeki değişiklikleri içermez
+- Dinamik ek protokol (ler) gerektirir; ağ hataları etrafında çalışabilir
+
+# Computation of shortest path in a graph (Bir grafikteki en kısa yolun hesaplanması)
+
+- Her düğümde ağın grafik gösterimini varsayalım
+- Her düğümden diğer düğümlere en kısa yolu hesaplamak için Djikstra algoritmasını kullanın
+- Ortaya çıkan yol bilgisinden sonraki atlama bilgisini çıkarın
+- Yönlendirme tablolarına sonraki atlama bilgilerini ekleme
+
+# Weighted graph (Ağırlıklı grafik)
+
+- Djikstra algoritması grafikteki kenarlardaki ağırlıkları barındırabilir
+- En kısa yol, toplam ağırlığı en düşük olan yoldur (tüm kenarların ağırlıklarının toplamı)
+- En kısa yol mutlaka en az kenar (veya atlama sayısı) gerektirmez
+
+<center><image src="./image/weightedgraph.png" witdh="300" height="300"></center>
+
+# Synopsis of Djikstra's algorithm (Dijkstra algoritmasının özeti)
+
+- Düğümlerin listesi ve bu düğümlere giden yolların ağırlıkları ile veri yapısını koruyun
+- Henüz yol hesaplanmamış olan düğümlerin S kümesindeki bir düğümü temsil etmek için sonsuzluğu kullanın
+- Her yinelemede, S'de bir düğüm bulun, bu düğümün yolunu hesaplayın ve düğümü S'den silin
+
+# Distance metrics (Mesafe metrikleri)
+
+- Grafik kenarlarındaki ağırlıklar çapraz kenarın "maliyetini" yansıtır
+  - Zaman
+  - Dolar
+  - Atlama sayısı (ağırlık == 1)
+- Sonuçta ortaya çıkan en kısa yol en az şerbetçiye sahip olmayabilir
+
+<center><image src="./image/weightedgraph.png" witdh="300" height="300"></center>
+
+# Dynamic route computation (Dinamik rota hesaplaması)
+
+- Ağ topolojisi dinamik olarak değişebilir
+  - Anahtarlar eklenebilir
+  - Bağlantılar başarısız olabilir
+  - Bağlantı maliyetleri değişebilir
+- Anahtarlar, yönlendirme tablolarını topoloji değişikliklerine göre güncellemelidir
+
+# Distributed route computation (Dağıtılmış rota hesaplanması)
+
+- Düğümler arasında ağ topolojisi hakkında bilgi aktarma
+- Bilgileri periyodik olarak güncelleme
+- Her düğüm en kısa yolları ve sonraki atlamaları yeniden hesaplar
+- Yönlendirme tablolarına değişiklik ekleme
+
+# Vector-distance algorithm (Vektör mesafesi algoritması)
+
+- Yerel bilgiler bir sonraki sekme yönlendirme tablosu ve her bir anahtardan olan mesafedir
+- Düzenli yayın topolojisi bilgilerini değiştirir
+- Diğer anahtarlar alınan tabloya göre yönlendirme tablosunu günceller
+- Daha ayrıntılı:
+  - Bir sonraki güncelleme mesajını bekleyin
+  - İletideki girişler aracılığıyla yineleme
+  - Girişin hedefe daha kısa yolu varsa
+  - Kaynağı hedefe sonraki atlama olarak ekle
+  - Mesafeyi bir sonraki sekmeden hedef PLUS'a olan mesafe olarak kaydedin
+  - Bu anahtara bir sonraki sıçraya kadar mesafe
+
+# Link-state routing (Bağlantı durumu yönlendirmesi)
+
+- Ağ topolojisini rota hesaplamasından ayırır
+- Anahtarlar yerel bağlantılar hakkında bağlantı durumu bilgileri gönderir
+- Her anahtar kendi yönlendirme tablolarını oluşturur
+  - Genel topolojiyi güncellemek için bağlantı durumu bilgilerini kullanır
+  - Djikstra algoritmasını çalıştırır
+
+# Comparison (Karşılaştırma)
+
+- Vector-distance algoritması
+  - Uygulaması çok basit
+  - Yakınsama problemleri olabilir
+  - RIP'de kullanılır
+- Link-state algoritması
+  - Çok daha karmaşık
+  - Anahtarlar bağımsız hesaplamalar yapar
+  - OSPF'de kullanılır
+
+# WAN teknolojisi örnekleri
+
+- **ARPANET**
+  - 1960'larda başladı
+  - ABD Savunma Bakanlığı'nın bir kuruluşu olan İleri Araştırma Projeleri Ajansı tarafından finanse edilmektedir
+  - Güncel fikirlerin, algoritmaların ve internet teknolojilerinin çoğu için inkübatör
+  - Sihirbazların Geç Nerede Kaldığını Görün
+- **X.25**
+  - Bağlantıya yönelik ağ oluşturma için erken standart
+  - Başlangıçta CCITT olan ITU'dan
+  - Terminal / zaman paylaşımı bağlantısı için kullanılan bilgisayar bağlantılarından önce gelir
+- **Frame Relay**
+  - Veri blokları iletmek için Telco hizmeti
+  - Bağlantıya dayalı hizmet; iki uç nokta arasındaki devre için telco ile sözleşme yapmalıdır
+  - Genellikle 56Kbps veya 1.5Mbps; 100Mbps'ye kadar çalışabilir
+- **SMDS - Switched Multi-megabit Data Service**
+  - Ayrıca bir Telco servisi
+  - Bağlantısız servis; herhangi bir SMDS istasyonu aynı SMDS "bulutundaki" diğer herhangi bir istasyona bir çerçeve gönderebilir
+  - Genellikle 1,5-100Mbps
+- **ATM - Asynchronous Transfer Mode**
+  - Ses, video, veri, ses ve görüntü için tek bir ...
+  - Düşük titreşim (teslimat süresinde değişiklik) ve yüksek kapasite
+  - Sabit boyutlu, küçük hücreler kullanır - 48 sekizli veri, 5 sekizli üstbilgi
+  - Bir ağa birden fazla ATM anahtarı bağlayabilir
+
+# Özet
+
+- WAN, rastgele mesafelere yayılabilir ve birçok bilgisayar arasında ara bağlantı kurabilir
+- Paket anahtarları ve noktadan noktaya bağlantıları kullanır
+- Paket anahtarları, paketleri hedefe teslim etmek için depola ve ilet ve yönlendirme tablolarını kullanır
+- WAN'lar hiyerarşik adresleme kullanır
+- Yönlendirme tablolarını hesaplamak için grafik algoritmaları kullanılabilir
+- Birçok LAN teknolojisi mevcuttur
