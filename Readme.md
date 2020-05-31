@@ -1183,3 +1183,355 @@
 - Çerçeveler, hedef, kaynak ve çerçeve türü gibi diğer bilgiler için alanları içeren bir başlık içerir
 - Çerçeve türü, çerçeve verilerinin nasıl yorumlanacağını tanımlar
 - Ağ analizörü tüm çerçeveleri alabilir ve istatistikleri görüntüleyebilir veya hata ayıklama sorunlarına yardımcı olabilir
+
+# Introduction
+
+- Arayüz kartları
+  - Neden ayrı bir kart
+  - Arayüz bilgisayara nasıl bağlanır
+  - `` Alıcı-verici '' nedir?
+- LAN kablolama şemaları
+- Mantıksal ve fiziksel topoloji
+
+# LAN ve bilgisayar hızları
+
+- LAN veri iletim hızları genellikle CPU hızlarına göre `` hızlı '' dır
+- 100MHz CPU, 100Mhz Ethernet üzerindeki her bit için yalnızca bir komut yürütebilir
+- LAN hızları, belirli işlemci hızlarından bağımsız olarak tanımlanır
+  - Bağlı sistemlerin karıştırılmasına izin verir
+  - LAN hızlarını etkilemeden yeni bilgisayarlar takılabilir
+
+# Network interface hardware (Ağ arabirimi donanımı)
+
+- CPU ağ hızlarında veri işleyemiyor
+- Bilgisayar sistemleri ağ bağlantısı için özel amaçlı donanım kullanır
+  - Genellikle arka panelde ayrı bir kart
+  - Ağ bağdaştırıcı kartı veya ağ arabirim kartı (NIC)
+- Bilgisayarın arkasındaki konektör daha sonra fiziksel ağa kablo kabul eder
+
+# I/O interfaces
+
+<center><image src="./image/iointerface.png" witdh="300" height="300"></center>
+
+# Network connector
+
+<center><image src="./image/networkconnector.png" witdh="300" height="300"></center>
+
+# NIC'ler ve ağ donanımı
+
+- NIC bir tür fiziksel ağ için üretilmiştir
+  - Ethernet arabirimi token ring ile kullanılamaz
+  - ATM arayüzü FDDI ile kullanılamaz
+- Bazı NIC'ler farklı, benzer donanımlarla kullanılabilir
+  - Kalın, ince ve 10Base-T Ethernet
+  - 10 Mb / sn ve 100 Mb / sn Ethernet
+
+# NIC and CPU processing (NIC ve CPU işleme)
+
+- NIC, sistem CPU'sundan bağımsız verileri işlemek için yeterli donanım içerir
+  - Bazı NIC'ler ayrı mikroişlemci içerir
+  - Analog devre, sistem veriyoluna arayüz, tamponlama ve işleme içerir
+- Sistem CPU'suna giden diğer I/O aygıtlarına benziyor
+  - Sistem CPU, mesaj isteği oluşturur
+  - NIC'e veri iletimi için talimatlar gönderir
+  - Gelen verilerin varışında kesinti alır
+
+# Connection between NIC and physical network (NIC ve fiziksel ağ arasındaki bağlantı)
+
+- İki alternatif:
+  - NIC tüm devreleri içerir ve doğrudan ağ ortamına bağlanır
+  - NIC'den gelen kablo, daha sonra ağ ortamına bağlanan ek devrelere bağlanır
+- İnce Ethernet ve 10Base-T
+- Her ikisi de Ethernet; ağ teknolojisi tek bir bağlantı stili ile sınırlı değildir
+
+# Thick Ethernet wiring (Kalın Ethernet kabloları)
+
+- Kalın koaksiyel kablo kullanır
+- AUI kablosu (veya alıcı-verici veya düşürme kablosu NIC'den alıcı-vericiye bağlanır
+- AUI kablosu NIC'den alıcı-vericiye dijital sinyal taşır
+- Alıcı-verici koaksiyelde analog sinyal üretir
+- AUI kablosundaki kablolar dijital sinyalleri, güç ve diğer kontrol sinyallerini taşır
+
+# Thick Ethernet example
+
+<center><image src="./image/thick.png" witdh="300" height="300"></center>
+
+- Kalın Ethernet ayrıca sinyal yansıtmasını önlemek için sonlandırma gerektirir
+
+# Connection multiplexing (Bağlantı çoğullama)
+
+- Bazı durumlarda, alıcı-vericiler rahatsız edici olabilir; örneğin, laboratuardaki iş istasyonları
+- Bağlantı çoklayıcı, birden fazla bilgisayarı tek bir alıcı-vericiye bağlar
+- Her bilgisayarın AUI kablosu bağlantı çoklayıcısına bağlanır
+- Çoklayıcıdan Ethernet koaksiyeline bir AUI
+
+<center><image src="./image/cntmultiplexing.png" witdh="300" height="300"></center>
+
+- Bağlı çoklayıcı, bağlı bilgisayarlara tamamen görünmez
+
+# Thin Ethernet wiring (İnce Ethernet kablolaması)
+
+- Kalın Ethernet koaksiyelinden daha ucuz ve kurulumu daha kolay olan ince koaksiyel kullanır
+- NIC içine yerleştirilmiş alıcı-verici elektroniği; NIC doğrudan ağ ortamına bağlanır
+- Koaksiyel kablo BNC konnektörü kullanır
+- Coax doğrudan bağlı her bilgisayarın arkasında çalışır
+- T konektörü doğrudan NIC'ye takılır
+
+<center><image src="./image/thinethernet.png" witdh="300" height="300"></center>
+
+- Birçok bilgisayar birbirine yakın konumdayken kullanışlıdır
+- Güvenilmez olabilir: Herhangi bir bağlantı kesilmesi tüm ağı bozar
+
+# 10Base-T
+
+- 10Base-T, bükümlü çift veya TP Ethernet olarak adlandırılır
+- AUI kablosunu bükümlü çift kablo ile değiştirir
+- Kalın koaksayı göbek ile değiştirir
+
+<center><image src="./image/10baset.png" witdh="300" height="300"></center>
+
+# Hubs
+
+- Bağlantı çoğullama konseptinin genişletilmesi
+- Bazen `` kutuda Ethernet '' olarak adlandırılır
+- Çok uzun AUI kablolarıyla etkili bir şekilde çok kısa bir Ethernet
+- Daha büyük Ethernet'lere bağlanabilir
+
+# Protocol software and Ethernet wiring (Protokol yazılımı ve Ethernet kablolaması)
+
+- Tüm kablolama teknolojileri aynı Ethernet özelliklerini kullanır
+  - Aynı çerçeve biçimi
+  - Aynı CSMA / CD algoritmaları
+- Farklı teknolojileri tek bir Ethernet'te karıştırabilir
+- NIC'ler her üç bağlantı teknolojisini de sağlayabilir
+- Protokol yazılımı kablolama teknolojilerini ayırt edemez
+
+<center><image src="./image/prosofether.png" witdh="300" height="300"></center>
+
+# Comparison of wiring schemes (Kablolama şemalarının karşılaştırılması)
+
+- Ayrı alıcı-verici, diğer iletişimi bozmadan bilgisayarın kapatılmasına veya ağ ile bağlantısının kesilmesine izin verir
+- Transciever rahatsız edici bir yerde bulunabilir
+- Arızalı alıcı-verici bulmak zor olabilir
+- İnce koaksiyel minimum kablo alır
+- Bir bilgisayarın (veya bir gevşek bağlantının) çıkarılması ağın tamamını kesebilir
+- Hub kablolama elektronik ve bağlantıları merkezileştirerek yönetimi kolaylaştırır
+- Alt satır - 10Base-T maliyeti nedeniyle en popüler
+
+<center><image src="./image/wiringschemes.png" witdh="300" height="300"></center>
+
+# Topolojiler ve ağ teknolojileri
+
+- 10Base-T ağ topolojisi bir veri yoludur; kablo topolojisi bir yıldızdır
+- Token ring ağ topolojisi bir halkadır; kablo topolojisi bir yıldızdır
+- Mantıksal ve fiziksel topolojileri ayırt etmeyi unutmayın
+
+# Diğer teknolojiler
+
+- AppleTalk, alıcı-vericiler arasında koaksiyel kablo ile veri yolu kabloları kullanır
+- AppleTalk ayrıca 4 telli telefon kablosunda hub teknolojisi veya yedek kablolar kullanabilir
+
+# Technology translation (Teknoloji çevirisi)
+
+- Bağdaştırıcılar bazı ağ teknolojileri arasında çeviri yapabilir
+  - Ethernet AUI-ince ağ
+- Ethernet AUI-10Base-T adaptörleri
+
+# Özet
+
+- Ağ arabirim kartı (NIC) bilgisayar sistemini ağa bağlar
+  - NIC bağımsız olarak çalışır; ağa ayak uydurabilecek kadar hızlı
+  - Genellikle CPU ile etkileşim için kesmeler kullanır
+- Mantıksal ağ topolojisi için birçok fiziksel kablo şeması mevcuttur
+- 10Base-T, mantıksal bir otobüs ve fiziksel bir yıldızdır
+
+# Introduction
+
+- LAN teknolojileri hız, mesafe ve maliyet kısıtlamaları ile tasarlanmıştır
+- Tipik LAN teknolojisi en fazla birkaç yüz metreyi bulabilir
+- Bir ağ daha uzun mesafeleri kapsayacak şekilde nasıl genişletilebilir; örneğin, Bucknell kampüsü?
+
+# LAN design for distance (Mesafe için LAN tasarımı)
+
+- Birçok LAN, paylaşılan ortam kullanır - Ethernet, token ring
+- Ortam uzunluğu, ortama adil ve paylaşılan erişimi etkiler
+  - CSMA / CD - çerçeveler arasında gecikme, minimum çerçeve uzunluğu
+  - Jeton geçirme - jeton için dolaşım süresi
+- Ortam uzunluğu elektrik sinyallerinin gücünü ve gürültü bağışıklığını etkiler
+
+# LAN extensions (LAN uzantıları)
+
+- Çeşitli teknikler LAN ortamının çapını genişletir
+- Çoğu teknik ek donanım kullanır
+- LAN segmentleri arasında geçirilen LAN sinyalleri
+- Ortaya çıkan karma teknoloji orijinal mühendislik kısıtlamaları dahilinde kalırken daha fazla mesafe kat eder
+
+# Fiber optic extensions (Fiber optik uzantılar)
+
+- Fiber optik kablo kullanarak bilgisayara bağlantıyı uzatabilir
+- Fiber modemleri ve fiber optik kabloyu AUI kablosuna takın
+
+<center><image src="./image/fiberoptic.png" witdh="300" height="300"></center>
+
+- Fiber modems:
+  - AUI sinyallerini dijital sinyale dönüştürme
+  - Fiber optik kablo ile dijital sinyalleri diğer modeme iletme
+- Çoğu zaman iki LAN'ı - tipik olarak bir köprü yoluyla - farklı binaları bağlamak için kullanılır
+
+# Repeaters (Tekrarlayıcılar)
+
+- LAN ortamını genişletmek isteyebilir
+  - Ethernet: Zamanlama kısıtlamaları daha uzun ortam sağlar
+  - Sinyal gücü kısıtlamaları uzunluğu sınırlar
+- Tekrarlayıcı: Analog sinyalleri yeniden ileten çift yönlü, analog amplifikatör
+
+<center><image src="./image/repeaters.png" witdh="300" height="300"></center>
+
+- Bir tekrarlayıcı, bir LAN segmentinin uzunluğunu etkili bir şekilde iki katına çıkarabilir
+
+# Ethernet repeaters (Ethernet tekrarlayıcı)
+
+- Sinyalleri segmentler arasında kolayca kopyalayın
+  - Çerçeve biçimlerini anlama
+  - Donanım adresleri yok
+- Herhangi bir Ethernet segmenti 500 metre ile sınırlıdır
+- Tekrarlayıcı 1000 metreye kadar ikiye katlanabilir
+
+<center><image src="./image/ethernetrepeaters.png" witdh="300" height="300"></center>
+
+# Repeater architecture (Tekrarlayıcı mimarisi)
+
+- Dört tekrarlayıcı ile Ethernet'i bir binadan uzatabilir
+- FOIRL - Fiber Optik Tekrarlayıcı Bağlantısı - köprüleri bağlamak için kullanılabilir
+
+# Tekrarlayıcıların özellikleri
+
+- Kullanımı çok kolay - sadece takın
+- Tekrarlayıcılar sadece analog sinyalleri yeniden iletir
+  - Çarpışmalar tüm ağı etkiler
+  - Geçici sorunlar - gürültü - ağ genelinde yayılır
+
+# Bridges (Köprüler)
+
+- Ayrıca iki LAN segmenti bağlayın
+- Bir segmentteki çerçeveleri diğer segment (ler) deki yeniden iletir
+- Komple çerçeveyi tutar/
+  - NIC'yi diğer istasyonlar gibi kullanır
+  - Çerçeve üzerinde bazı işlemler gerçekleştirir
+- Bağlı diğer bilgisayarlara görünmez
+
+# Bridged LAN segments (Köprülü LAN segmentleri)
+
+<center><image src="./image/bridgedsegments.png" witdh="300" height="300"></center>
+
+# Characteristics of bridges (Köprülerin özellikleri)
+
+- Kullanımı oldukça kolay - sadece takın
+- Çarpışmaları, gürültüyü izole edin
+
+# Filtering bridges (Filtreleme köprüleri)
+
+- Köprüler ek işlemler yapabilir
+  - Çarpışmalar, gürültü iletmeyin
+  - Yalnızca gerektiğinde kareleri iletin
+- Bridge, çerçeve filtreleme gerçekleştirir ve LAN segmentleri boyunca çerçeveleri hedefe iletir
+  - İstasyonları kareleri izleyerek konumlarını öğrenir
+  - Tüm yayın ve çok noktaya yayın paketlerini iletir
+
+# Frame filtering (Çerçeve filtreleme)
+
+- Köprü, gelen her çerçevenin hedefini kontrol eder
+- Hedefi bilinen istasyonlar listesinde arar
+  - Çerçeveyi hedefe giden yolda bir sonraki arabirime iletir
+  - Çerçevenin alındığı LAN segmentindeki hedef çerçeveyi iletmez
+
+# How does bridge set up table? (Köprü tablosu nasıl kurulur?)
+
+- Bridge, her çerçevedeki kaynak adresini inceler
+- Çerçevenin alındığı LAN segmenti için listeye giriş ekler
+- Hedefi her arabirimde listede olmayan herhangi bir kareyi iletmelidir
+
+# Filtering example
+
+<center><image src="./image/filtering.png" witdh="300" height="300"></center>
+
+<center><image src="./image/filteringtab.png" witdh="300" height="300"></center>
+
+# Startup behavior of filtering bridges (Filtreleme köprülerinin başlatma davranışı)
+
+- Başlangıçta, tüm bridges yönlendirme tabloları boş
+- LAN üzerindeki her bir istasyondan ilk kare tüm LAN segmentlerine iletilir
+- Tüm istasyonlar tanımlandıktan sonra, çerçeveler yalnızca gerektiğinde iletilir
+- Örneğin elektrik kesintisinden sonra trafik patlamasına neden olabilir
+
+# Designing with filtering bridges (Filtreleme köprüleri ile tasarım)
+
+- Filtre köprüsü, trafik yerelse farklı LAN segmentlerinin aynı anda kullanılmasına izin verir
+- U ve V çerçeveleri aynı anda değiştirebilir X ve Y çerçeveleri değiştirebilir
+
+<center><image src="./image/filtering.png" witdh="300" height="300"></center>
+
+- Tasarımcılar yerel iletişim kalıplarını tanımlar ve iletişim kuran bilgisayar gruplarını köprülerle izole eder
+
+# Bridging between buildings (Binalar arasında köprü kurma)
+
+- Fiber modemlerle AUI genişletmeye benzer
+- Farklı binalarda LAN segmentine uzun bağlantı ile bir binaya köprü koyabilir
+- Uzak binadaki her bilgisayar için genişletilmiş AUI bağlantısını önler
+
+<center><image src="./image/buildingbridging.png" witdh="300" height="300"></center>
+
+# Daha uzun mesafeler arasında bridging kurma
+
+- İki köprüyü ve LAN segmentini bağlamak için kiralık hat, mikrodalga, lazer veya uydu kullanabilir
+- Bir yerine iki köprü kullanma:
+  - Her iki uçtaki filtreler, yavaş bağlantıdaki trafiği azaltır
+  - Farklı iletim hızlarına uygun olarak her iki uçta tamponlama sağlar
+
+# Bridges and cycles (Köprüler ve çevrimler)
+
+- Birçok LAN segmentini birbirine bağlamak için birden fazla köprü kullanabilir
+
+<center><image src="./image/bridgescycles.png" witdh="300" height="300"></center>
+
+- C segmenti istasyonu, g, B2, B1, B3 ve B6 segmentlerinden g segmentine istasyon gönderir.
+- Yayınlar tüm köprülerden iletiliyor
+- Farzedelim ki g ve f'yi birbirine bağlayan başka bir köprü?
+
+- Köprülü ağlarda dairesel bir yola döngü adı verilir
+- B4 eklemek bir döngü oluşturur
+
+<center><image src="./image/bridge4.png" witdh="300" height="300"></center>
+
+# Eliminating broadcast cycles (Yayın döngülerini ortadan kaldırma)
+
+- Köprüler, her segmentte tam olarak bir kez yayın yapmak için işbirliği yapmalıdır
+- Grafik teorisinin çözümü - yayılan ağaç - hangi köprülerin yayınları yönlendireceğini belirlemek için kullanılır
+- Her köprü ağa katıldıkça, özel donanım (genellikle çok noktaya yayın) adresindeki diğer köprülerle iletişim kurar
+  - Ağ topolojisini öğrenir
+  - Yayılan ağaç hesaplamasını gerçekleştirir
+  - Köprünün bir döngü oluşturup oluşturmayacağını belirler
+
+# Switching 
+
+- Her bağlantı noktası için etkili bir şekilde ayrı bir LAN segmenti
+- Hub'a benzer - hub tüm portlar arasında tek segment paylaşır
+- Anahtarlama ile, birden fazla istasyon aynı anda iletim yapabilir
+- Çok daha yüksek toplam bant genişliği sağlar
+
+# Switches and hubs 
+
+- Anahtarlar port başına daha pahalıdır
+- Bazı istasyonlar için hub ve diğerleri için hub kullanmak ekonomik olarak daha anlamlı olabilir
+
+# Özet
+
+- Fiber optik ve modemler AUI'yi tek istasyon için genişletmek için kullanılabilir
+- Tekrarlayıcı amplifikatör görevi görür ve analog sinyalleri yeniden iletir
+- Bridge gelen çerçevenin tamamını kabul eder ve yeniden iletir
+  - Çarpışmaları iletmez
+  - Hedef segmentlerdeki çarpışmaları önler
+- Filtreleme köprüsü, çerçeveleri yalnızca gerektiği gibi iletir
+  - Yerel iletim için LAN segmentlerinin aynı anda kullanılmasına izin verir
+  - Tüm yayın ve çok noktaya yayın paketlerini iletir
+- Anahtarlar, ayrı LAN segmentlerini simüle ederek her bağlantı noktasına tam LAN hızı sağlar
