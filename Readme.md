@@ -1607,8 +1607,8 @@
 # Intermediate capacity (Ara kapasite)
 
 - Fiyat doğrusal olarak hızlanmıyor
-- T3 için \\\\\\\\\$\\\\\\\\\$ <28 için 28 \\\\\\\\\* T1
-  ... ancak ihtiyacınız olan tek şey 9 Mbps ise, T3 için \\\\\\\\\$\\\\\\\\\$> 6 \\\\\\\\\\* T1 için \\\\\\\\\\$\$
+- T3 için \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$ <28 için 28 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\* T1
+  ... ancak ihtiyacınız olan tek şey 9 Mbps ise, T3 için \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$> 6 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\* T1 için \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$\$
 - Çözüm: Birden fazla T1 hattını ters çoklayıcı ile birleştirin
 
 <center><image src="./image/intermediate.png" witdh="300" height="300"></center>
@@ -2007,3 +2007,515 @@
 - WAN'lar hiyerarşik adresleme kullanır
 - Yönlendirme tablolarını hesaplamak için grafik algoritmaları kullanılabilir
 - Birçok LAN teknolojisi mevcuttur
+
+# Network ownership
+
+- **Private network**: Tek bir kuruluş veya şirkete ait
+- **Public network**: Ortak taşıyıcının sahibi olduğu (ör. Telefon şirketi)
+
+# Private network
+
+- Genellikle LAN teknolojisi
+- Bir bina veya kampüste birbirine bağlı birden fazla LAN
+- Bazen internet denir
+
+# Private network architecture (Özel ağ mimarisi)
+
+- Diğer ağlardan (ör. İnternet) bağımsız olarak çalışır.
+- Genellikle bir veya birkaç yakından yönetilen harici bağlantı içerir.
+- Bağlantılardaki erişimi kısıtlayabilir.
+- Örnek - Bucknell
+
+# Managing private networks (Özel ağları yönetme)
+
+- Kuruluş kendi ekipmanını satın alıyor
+- Ağı tasarlamak, uygulamak, sürdürmek ve yükseltmek için personel işe alır
+- Tüm ağ yönetiminden sorumlu
+
+# Extending private networks (Özel ağları genişletme)
+
+- Büyük kuruluşların birden fazla binası veya kampüsü olabilir
+- Kabloları yalnızca kendi mülküne kurabilir
+- Ortak taşıyıcıdan kiralanan hatlar için sözleşme yapabilir
+- Örnek - UPS
+
+<center><image src="./image/ups.png" witdh="300" height="300"></center>
+
+# Public network (Genel ağ)
+
+- Ortak taşıyıcı tarafından işletilir
+- Kiralanan hatlardan şebeke kuran telefon şirketi veya başka bir kuruluş olabilir
+- Birden çok kuruluş abone olur ve bağlanır
+- Veriler genel ağı diğer kuruluşlara aktarır
+- Örnek - AT&T
+
+<center><image src="./image/at&t.png" witdh="300" height="300"></center>
+
+# Virtual private network (Sanal özel ağ)
+
+- VPN (Sanal Özel Ağ) özel ve genel ağların özelliklerini birleştirir
+- Tek bir kuruluşla sınırlıdır
+- Bağlantı için genel ağı kullanır
+- Bağlantılar, bazen tünel olarak da adlandırılır, bağlantı siteleri
+- Her site tüneli başka bir siteye doğrudan noktadan noktaya bağlantı olarak görür
+- Herkese açık ağın diğer kullanıcıları tarafından erişilemez
+
+# Service paradigm (Hizmet paradigması)
+
+- Bağlantı yönelimli - telefon sistemine benzer; uç noktalar, değiş tokuş yapacak verileri olduğu sürece bir bağlantı kurar ve sürdürür
+- Bağlantısız - posta sistemine benzer; uç nokta verileri koyar
+- Bir pakete göndermek ve teslimat için ağa eller
+
+# Connection-oriented service (Bağlantı odaklı hizmet)
+
+- Bir uç nokta ağdan bağlantı istiyor
+- Diğer uç nokta bağlantıyı kabul eder
+- Bilgisayarlar bağlantı üzerinden veri alışverişi yapar
+- Genellikle akış arayüzü
+  - Kaynak ağa veri akışı sağlar
+  - Ağ, teslimat için paketlere ayrılıyor
+- Veri aktarımı mutlaka sürekli değildir; telefon gibi, hiçbir veri iletilmezken bağlantı yerinde kalır
+- İletim tamamlandığında bağlantıyı kesmek için bir uç nokta istek ağı
+
+# Connectionless service (Bağlantısız servis)
+
+- Bağlantı gerekmez
+- Veri kaynağı, verilere hedef bilgileri ekler ve ağa sunar
+- Ağ, her veri öğesini ayrı ayrı sunar
+
+# Comparions (Karşılaştırma)
+
+- **Bağlantı odaklı**: muhasebe daha kolay, uygulama ağ sorunlarını hemen öğrenebilir
+- **Bağlantısız**: daha az ek yük, ağın uygulanması daha kolay
+
+# Connection duration and persistence (Bağlantı süresi ve sürekliliği)
+
+- Bağlantılar talep üzerine yapılabilir veya kalıcı olarak kurulabilir
+  - Anahtarlamalı bağlantı veya anahtarlanmış sanal devre
+  - Kalıcı bağlantı veya sağlanan sanal devre
+- Kalıcı bağlantılar
+  - Başlangıçta kablolu
+  - Şimdi sistem başlatma zamanında yapılandırıldı
+- Anahtarlamalı bağlantılar
+  - Bilgisayar ağla kalıcı bağlantıyı sürdürüyor
+  - Ağ talep üzerine bağlantı kurar
+
+<center><image src="./image/durationandpersistence.png" witdh="300" height="300"></center>
+
+- Dahili bileşenler anahtarlardır; ağ anahtarlamalı bir veri ağıdır
+
+# Examples of service paradigms (Hizmet paradigmalarına örnekler)
+
+<center><image src="./image/serviceexample.png" witdh="300" height="300"></center>
+
+# Addresses and connection identifiers (Adresler ve bağlantı tanımlayıcıları)
+
+- Adres tam ve benzersiz bir tanımlayıcıdır
+- Bağlantısız teslimat, her pakette adres gerektirir
+- Bağlantıya yönelik dağıtım, hedef yerine bağlantıyı tanımlayan bir stenografi kullanabilir
+- ATM - 160 bit adres, 28 bit bağlantı tanımlayıcı
+  - Bağlantı tanımlayıcı şunları içerir:
+  - 12 bit sanal yol tanımlayıcısı (VPI)
+  - 16 bit sanal devre tanımlayıcısı (VCI)
+  - Her bilgisayar için yerel bağlantı tanımlayıcı
+  - ATM anahtarının farklı bölümlerinde farklı olabilir
+
+# Network performance characteristics (Ağ performans özellikleri)
+
+- Delay (geçikme)
+- Throughput (çıktı)
+- Delay-throughput product (Gecikmeli üretim ürünü)
+
+# Network delay (Ağ gecikmesi)
+
+- **Delay (Gecikme)** - verilerin aktarım ağına geçiş süresinin ölçüsü
+- **Propagation delay (Yayılma gecikmesi)** - ortam boyunca seyahat süresi
+- **Switching delay (Anahtarlama gecikmesi)** - ağ bileşeninin (hub, bridge, packet switch) verileri iletme süresi
+- **Access delay (Erişim gecikmesi)** - ortamın kontrolünü alma süresi (CSMA / CD, token)
+- **Queuing delay (Kuyruk gecikmesi)** - paket anahtarlarında geçirilen süre
+
+# Throughput (Veri)
+
+- Verim, verilerin ağda aktarılma hızını ölçer
+  - 300 bps (bits per second) - old modems
+  - 1 gps (gigabit [109] bits per second) - fastest today
+- Bandwidth (Bant genişliği) - temel donanım sınırı
+- Effective throughput (Etkili üretim) - gerçek veri teslimi
+
+# Relationship between delay and throughput (Gecikme ve verim arasındaki ilişki)
+
+- Verim teorik maksimum değere yaklaştıkça gecikme artar
+- Trafik sıkışıklığı olarak bilinen aşırı trafik
+- Etkili gecikme, D, genellikle yaklaşık olarak tahmin edilebilir:
+- <center>D =D<sub>0</sub> /(1 - U)</center>
+
+# Delay-throughput product (Gecikmeli üretim ürünü)
+
+- Gecikme süresinin etkin iş hacmi ile çarpımı olarak hesaplanır
+- Ağda bulunabilecek veri miktarını ölçer
+- Uzun gecikme sürelerine sahip hızlı ağlarda, bilgisayar göndermek hedef ilk biti almadan önce büyük miktarda veri üretebilir
+
+# Özet
+
+- Herkese açık ve özel ağlar
+- Bağlantı yönelimli ve bağlantısız hizmet paradigmaları
+- Bağlantı tanımlayıcı, bir hedef adresin kısayoludur
+- Ağlar aşağıdakiler için ölçülebilir:
+  - Delay
+  - Throughput
+  - Delay-throughput product
+
+# Introduction (Giriş)
+
+- LAN / WAN donanımı tüm bilgisayar iletişim sorunlarını çözemez
+- LAN ve WAN sistemleri için yazılım büyük ve karmaşıktır
+- Katmanlama, ağ yazılımı tasarımı ve uygulamasını organize etmek için bir yapılandırma tekniğidir
+
+# Why network software? (Neden ağ yazılımı?)
+
+- Ham donanım yoluyla veri göndermek garip ve zahmetli - programlama paradigmalarına uymuyor
+- Okuma / yazma kafasını konumlandırmak ve ayrı ayrı sektörlere erişmek için disk denetleyicisine çağrı yaparak dosyalara erişmeye eşdeğerdir
+- Başka herhangi bir yardım almadan ilgilendiğiniz her yere veri gönderemeyebilir
+- Ağ yazılımı, uygulamalara yüksek seviye arayüz sağlar
+
+# Why protocols? (Neden protokoller)
+
+- Adı Yunan protokolünden türetilir, dizin bir kaydırma
+- Diplomatlar resmi etkileşimlere rehber olarak protokol adı verilen kuralları kullanırlar
+- Ağ protokolü veya bilgisayar iletişim protokolü, ağdaki bilgisayarlar arasında değiş tokuş edilen mesajların biçimini ve anlamını belirleyen bir dizi kuraldır
+  - Biçime bazen sözdizimi adı verilir
+  - Anlam bazen anlambilim olarak adlandırılır
+- Protokoller protokol yazılımı tarafından uygulanır
+
+# One or many protocols? (Bir veya daha fazla protokol mü?)
+
+- Ağ üzerinden bilgisayar iletişimi çok zor bir sorundur
+- Karmaşıklık, her biri sorunun bir bölümünü yöneten birden fazla protokol gerektirir
+- Basit veya karmaşık olabilir; hepsi birlikte çalışmalı
+
+# Protocol suites (Protokol paketleri)
+
+- Uyumluluk için tasarlanmış bir dizi ilgili protokole protokol paketi denir.
+- Protokol paketi tasarımcıları:
+  - İletişim problemini analiz etme
+  - Sorunları alt problemlere ayırın
+  - Her alt sorun için bir protokol tasarlayın
+- İyi tasarlanmış bir protokol paketi
+  - Verimli ve etkilidir - sorunu fazlalık olmadan çözer ve ağ kapasitesini en iyi şekilde kullanır
+  - Diğer protokollerde değişiklik yapmadan tek tek protokollerin değiştirilmesine izin verir
+
+# Layered protocol design (Katmanlı protokol tasarımı)
+
+- Katmanlama modeli, ağ protokollerindeki karmaşıklık sorununa bir çözümdür
+- Model, ağ protokolünü her biri ağ iletişim sorununun bir bölümünü çözen katmanlara bölmeyi önerir
+- Bu katmanlar, tasarım sorununu kolaylaştıran çeşitli kısıtlamalara sahiptir
+- Her katman için bir protokol veya protokoller içerecek şekilde tasarlanmış ağ protokolü
+
+# The ISO 7-layer reference model (ISO 7 katmanlı referans modeli)
+
+- Uluslararası Standartlar Örgütü (ISO) 7 katmanlı bir referans modelini bir ağ protokolü paketinin tasarımına rehber olarak tanımladı
+
+<center><image src="./image/iso.png" witdh="300" height="300"></center>
+
+- Katmanlar adlandırılır ve numaralandırılır; `` katman n '' ye referans genellikle ISO 7 katmanlı referans modelinin n'inci katmanı anlamına gelir
+
+# The layers in the ISO model (ISO modelindeki katmanlar)
+
+- Uyarı - birçok modern protokol ISO modeline tam olarak uymaz ve ISO protokol paketi çoğunlukla tarihi ilgi çekicidir
+- Kavramlar hala büyük ölçüde yararlı ve terminoloji devam ediyor
+
+- **Layer 7: Application**
+  - FTP ve SMTP gibi uygulamaya özgü protokoller (elektronik posta)
+- **Layer 6: Presentation**
+  - Verilerin gösterimi için ortak formatlar
+- **Layer 5: Session**
+  - Uzak bir bilgisayarda oturum açma gibi oturumların yönetimi
+- **Layer 4: Transport**
+  - Bilgisayarlar arasında güvenilir veri teslimi
+- **Layer 3: Network**
+  - Fiziksel bir ağ üzerinden adres atama ve veri dağıtımı
+- **Layer 2: Data Link**
+  - Çerçevelerdeki verilerin formatı ve ağ arayüzü üzerinden çerçevelerin teslimi
+- **Layer 1: Physical**
+  - Temel ağ donanımı - RS-232 veya Ethernet gibi
+
+# Layered software implementation (Katmanlı yazılım uygulaması)
+
+- Katmanlı tasarımdan uygulanan yazılımlar katman organizasyonuna sahiptir
+- Yazılım modülleri şu şekilde görüntülenebilir:
+
+<center><image src="./image/softwareimp.png" witdh="500" height="600"></center>
+
+# Layered software and stacks (Katmanlı yazılım ve yığınlar)
+
+- Önceki şekildeki ilgili modüllere protokol yığını veya yalnızca yığın adı verilir.
+- İki kısıtlama:
+  - Her katman için yazılım yalnızca alt katmanlar tarafından sağlanan yazılımın hizmetlerine bağlıdır
+  - Hedefteki n katmanındaki yazılım, gönderende n katmanı tarafından gönderilenle aynı protokol mesajını alır
+- Bu kısıtlamalar, protokollerin bağımsız olarak test edilebileceği ve bir protokol yığını içinde değiştirilebileceği anlamına gelir
+
+<center><image src="./image/softwareimp2.png" witdh="500" height="600"></center>
+
+# Messages and protocol stacks (Mesajlar ve protokol yığınları)
+
+- Gönderende her katman:
+  - Yukarıdaki katmandan giden bir mesajı kabul eder
+  - Üstbilgi ve başka işlemler ekler
+  - Ortaya çıkan mesajı bir sonraki alt katmana aktarır
+- Alıcıda her katman:
+  - Aşağıdaki katmandan gelen bir mesaj alır
+  - Bu katmanın üstbilgisini kaldırır ve başka işlemler gerçekleştirir
+  - Ortaya çıkan mesajı bir sonraki üst katmana geçirir
+
+# Commercial stacks (Ticari istifler)
+
+<center><image src="./image/stacks.png" witdh="300" height="300"></center>
+
+# Protocol headers (Protokol başlıkları)
+
+- Her katmandaki yazılım, başlıklarda depolanan bilgiler aracılığıyla karşılık gelen katmanla iletişim kurar
+- Her katman üstbilgisini bir sonraki daha yüksek katmandan gelen iletinin önüne ekler
+- İleti ağı geçtikçe üstbilgiler iletinin önüne yerleştirilir
+
+<center><image src="./image/protocolHeaders.png" witdh="300" height="300"></center>
+
+# Control packets (Kontrol paketleri)
+
+- Protokol katmanlarının genellikle veri alışverişi yapmadan doğrudan iletişim kurmaları gerekir
+  - Gelen verileri onayla
+  - Sonraki veri paketini isteme
+- Katmanlar kontrol paketleri kullanır
+  - Gönderende katman n tarafından oluşturulur
+  - Alıcıdaki katman n tarafından yorumlanır
+  - Diğer paketler gibi n-1 ve altındaki katmanlarla iletilir
+
+# Techniques for reliable network communication (Güvenilir ağ iletişimi için teknikler)
+
+- Model - bir veri bloğunun bir bilgisayardan diğerine güvenilir teslimatı
+  - Veri değerleri değişmedi
+  - Veriler sıralı
+  - Eksik veri yok
+  - Çoğaltılmış veri yok
+- Örnek - verilerin değişmesini sağlamak için kullanılan eşlik biti, sağlama toplamı ve CRC
+
+# Out-of-order delivery (Sipariş dışı teslimat)
+
+- Paketler arızalı olarak teslim edilebilir - özellikle birden fazla ağ içeren sistemlerde
+- Sıra dışı teslimat, sıralama yoluyla tespit edilebilir ve düzeltilebilir
+  - Gönderen, giden her pakete sıra numarası ekler
+  - Alınan, paketleri sıraya koymak ve eksik paketleri tespit etmek için sıra numaralarını kullanır
+
+# Duplicate delivery (Yinelenen yayınlama)
+
+- İletim sırasında paketler çoğaltılabilir
+- Sıralama aşağıdakiler için kullanılabilir:
+  - Yinelenen sıra numaralarına sahip yinelenen paketleri algılama
+  - Bu yinelenen paketleri atın
+
+# Lost packets (Kayıp paketler)
+
+- Belki de en yaygın sorun kayıp paketlerdir
+- Herhangi bir hata - bit hatası, yanlış uzunluk - alıcının paketi atmasına neden olur
+- Çözülmesi zor bir sorun - alıcı bir paketin ne zaman kaybolduğuna nasıl karar veriyor?
+
+# Retransmission (İletimde)
+
+- Protokoller, kayıp paketleri tespit etmek ve düzeltmek için yeniden iletimle olumlu onay kullanır
+  - Alıcı, paketlerin alındığını onaylayan kısa mesaj gönderir
+  - Gönderen, kayıp paketleri eksik bildirimler nedeniyle ihlal ediyor
+  - Gönderici kayıp paketleri yeniden iletir
+- Gönderen, giden her paket için zamanlayıcı ayarlar
+  - Paket kopyasını kaydeder
+  - Zamanlayıcı, onay alınmadan önce sona ererse, gönderen kaydedilen kopyayı yeniden iletebilir
+- Protokoller, kurtarılamayan ağ hatasını tespit etmek için yeniden iletimde üst sınırı tanımlar
+
+# Replay (Tekrar)
+
+- Daha sonraki oturumlara yeterince gecikmeli paketler eklenebilir
+- İki bilgisayarın 1 ila 5 numaralı paketlerle veri alışverişi yaptığını varsayalım
+- Paket 4 olağanüstü bir gecikmeyle karşılaşır; bilgisayarlar paket 4'ün geçerli bir kopyasını sunmak için yeniden iletim kullanır
+- İki bilgisayar daha sonra 1 ila 10 numaralı paketlerle veri alışverişi yapar
+- İlk `paket 4 '' ikinci oturum sırasında gelebilir, böylece o eski paketteki (mevcut` paket 4 '' yerine) verilere eklenir
+- Protokoller, paketleri farklı oturumlardan ayırmak için bir protokol oturumundaki her pakete oturum numarası ekler
+
+# Flow control (Akış kontrolü)
+
+- Veri taşması, alıcı verileri gelen verileri işleyebileceğinden daha hızlı ilettiğinde ortaya çıkabilir
+- Protokoller, alıcının veri iletim hızını kontrol edebileceği akış kontrol mekanizmalarını kullanır
+  - Stop-and-go
+  - Sliding window
+
+# Stop-and-go flow control (Dur-kalk akış kontrolü)
+
+- Alıcı, bir sonraki paket için hazır olduğunda küçük kontrol paketi gönderir
+- Gönderici bir sonraki paketi göndermeden önce kontrol paketini bekler
+- Teslim süresi büyükse ağ bant genişliğinden çok verimsiz olabilir
+
+# Sliding window (Sürgülü pencere)
+
+Gönderenin bir onay almadan önce birden fazla paket iletmesine izin verir
+
+- Gönderilebilecek paket sayısı protokol tarafından tanımlanır ve pencere olarak adlandırılır
+- Onaylar alıcıdan geldiğinde, pencere veri paketleri boyunca hareket ettirilir; dolayısıyla `` sürgülü pencere ''
+
+# Example of sliding window
+
+<center><image src="./image/window.png" witdh="500" height="600"></center>
+
+# Comparison of stop-and-go and sliding window
+
+<center><image src="./image/StopAnGoAndSliding.png" witdh="500" height="600"></center>
+
+# Transmission times (İletim süreleri)
+
+- Dur-kalk için, her paketin teslim edilmesi 2L zaman alır (burada L gecikme süresi veya ağ teslim süresi)
+- Kayan pencere, penceredeki paket sayısına göre artabilir:
+  - T<sub>w</sub> = T<sub>g</sub> \* W
+  - T<sub>w</sub> is sliding window throughput,
+  - T<sub>g</sub> is stop-and-go throughput
+- İletim süresi ağ iletim hızıyla da sınırlıdır:
+- T<sub>w</sub> = min(B, T<sub>g</sub> \* W)
+  - B is maximum network bandwidth
+
+# Network congestion (Network congestion)
+
+- Ağ tıkanıklığı, birden çok bağlantı içeren ağ sistemlerinde ortaya çıkar
+- Bir bağlantıya giriş maksimum bant genişliğini aşarsa, paketler bu bağlantıya bağlandığında sıraya girer
+
+<center><image src="./image/congestion.png" witdh="600" height="500"></center>
+
+- Sonunda paketler atılacak ve paketler yeniden iletilecek
+- Sonuçta, ağ tıkanıklık çökmesi yaşayacak
+- Veri taşması ile ilgili, ancak aynı değil
+
+# Aoviding and recovering from network congestion (Ağ tıkanıklığından kurtulma ve kurtarma)
+
+- Protokoller, ağın durumunu izleyerek ve uygun eylemleri gerçekleştirerek tıkanıklığı önlemeye ve ağ çökmesinden kurtulmaya çalışır
+- Can use two techniques
+  - Paket anahtarlarından bildirim
+  - Paket kaybından tıkanıklığı çıkar
+- Modern ağlar güvenilir olduğu ve donanım arızası nedeniyle paketleri nadiren kaybettiği için paket kaybı tıkanıklığı tespit etmek için kullanılabilir
+- Gönderen, eksik bildirimler yoluyla paket kaybından tıkanıklığı çıkarabilir
+- Tıkanıklık paketlerinin oranı veya yüzdesi tıkanıklık derecesini ölçmek için kullanılabilir
+
+# Art, engineering and protocol design (Sanat, mühendislik ve protokol tasarımı)
+
+- Protokol tasarımı mühendislik ve sanatı karıştırır
+  - Spesifik problemleri çözmek için iyi bilinen teknikler vardır
+  - Bu teknikler ince yollarla etkileşime giriyor
+  - Sonuç protokol paketi etkileşimi hesaba katmalıdır
+- Verimlilik, etkililik, ekonomi dengelenmelidir
+
+# Summary
+
+- Katmanlama, protokol tasarımına ve uygulanmasına rehberlik eden bir tekniktir
+- Protokoller, ilgili protokol paketlerinde birlikte gruplanır
+- Katmanlı protokol koleksiyonuna protokol yığını denir
+- Protokoller, verilerin güvenilir bir şekilde iletilmesi için çeşitli teknikler kullanır
+
+# Motivation
+
+- Birçok farklı LAN ve WAN teknolojisi vardır
+- Gerçek dünyada, bilgisayarlar birçok farklı teknolojiyle birbirine bağlanır
+- Büyük bir organizasyona yayılan herhangi bir sistem birden fazla teknolojiyi barındırmalıdır
+
+# Universal service (Evrensel hizmet)
+
+- Telefonlar kullanışlıdır, çünkü herhangi bir telefon başka bir telefona erişebilir
+- Bilgisayarlar arasındaki evrensel hizmet, her bilgisayarın kullanışlılığını büyük ölçüde artırır
+- Evrensel hizmet sunmak, farklı teknolojiler kullanan birbirine bağlı ağları gerektirir
+
+# Internetworking
+
+- Internetworking, farklı teknolojilerin çoklu ağlarını birbirine bağlamak için bir şemadır
+- Hem donanım hem de yazılım kullanır
+- Ağlar arasında konumlandırılmış ekstra donanım
+- Bağlı her bilgisayardaki yazılım
+- Birbirine bağlı ağ sistemine internet işi veya internet denir
+
+# Routers
+
+- Yönlendirici, ağları birbirine bağlamak için kullanılan bir donanım bileşenidir
+- Bir yönlendiricinin birden çok ağda arabirimleri vardır
+
+<center><image src="./image/routers.png" witdh="600" height="500"></center>
+
+- Ağlar farklı teknolojiler kullanabilir
+- Yönlendirici paketleri ağlar arasında iletir
+- Her ağın standartlarını karşılamak için paketleri gerektiği gibi dönüştürür
+
+# Internet architecture (İnternet mimarisi)
+
+- Bir ağ, yönlendiricilerle birbirine bağlı birçok ağdan oluşur
+
+<center><image src="./image/internetarchitecture.png" witdh="600" height="500"></center>
+
+- Yönlendiriciler ikiden fazla arabirime sahip olabilir
+
+<center><image src="./image/routers.png" witdh="600" height="500"></center>
+
+# Routers in an organization (Bir kuruluştaki yönlendiriciler)
+
+- Bir kuruluştaki tüm ağları tek bir yönlendirici ile birbirine bağlamak mümkün olurdu
+- Çoğu kuruluş birden çok yönlendirici kullanır
+  - Her yönlendiricinin sonlu kapasitesi vardır; tek bir yönlendiricinin tüm kuruluştaki tüm trafiği işlemesi gerekir
+  - Internetworking teknolojisi, başarısız bileşenler etrafında otomatik olarak yönlendirilebildiğinden, birden fazla yönlendirici kullanmak güvenilirliği artırır
+
+# A virtual network (Sanal ağ)
+
+- Internetworking yazılımı, birden çok fiziksel ağdan tek ve kesintisiz bir sanal ağ oluşturur
+  - Evrensel adresleme şeması
+  - Evrensel hizmet
+- Kullanıcılardan ve uygulama programlarından gizlenen fiziksel ağların tüm ayrıntıları
+
+<center><image src="./image/virtualnetwork.png" witdh="600" height="500"></center>
+
+# A protocol suite for internetworking (İnternet çalışması için bir protokol paketi)
+
+- TCP / IP İnternet Protokolleri veya basitçe, TCP / IP en yaygın kullanılan internet işleme protokolü paketidir
+- İlk internet protokolü paketi
+- İnternet kavramı (başlangıçta TCP / IP ile birlikte geliştirilen catenet denir)
+- Başlangıçta ARPA ile finanse edilir
+- NSF tarafından alındı
+- Sihirbazların Geç Kaldığı Yerde Tanımlanmıştır
+
+# Internetworking protocols (Internet çalışma protokolleri)
+
+- Diğerleri arasında IPX, VINES, AppleTalk
+- TCP / IP açık ara en yaygın kullanılan
+- Satıcı ve platformdan bağımsız
+- İnternette kullanılır - 82 ülkede 20 milyon bilgisayar
+
+# TCP/IP layering (TCP / IP katmanı)
+
+- OSI 7 katmanlı model internet çalışmasını içermez
+- TCP / IP katmanlama modeli beş katman içerir
+
+<center><image src="./image/osi7.png" witdh="600" height="500"></center>
+
+- **Layer 5: Application**
+  - ISO model katmanları 6 ve 7'ye karşılık gelir; uygulamalar arasında iletişim için kullanılır
+- **Layer 4: Transport**
+  - ISO modelinde katman 4'e karşılık gelir; verilerin güvenilir bir şekilde iletilmesini sağlar
+- **Layer 3: Internet**
+  - Farklı teknolojilerdeki ağlarda iletilen paketlerin tek biçimli biçimini ve yönlendiricilerdeki paketleri iletmek için kuralları tanımlar
+- **Layer 2: Network**
+  - ISO modelindeki katman 2'ye karşılık gelir; donanım çerçevelerinde paket taşıma biçimlerini tanımlar
+- **Layer 1: Hardware**
+  - ISO modelinde katman 1'e karşılık gelir; temel ağ donanımını tanımlar
+
+# Hosts, routers and protocol layers
+
+- Ana bilgisayar veya ana bilgisayar, uygulamaları çalıştıran bir internete bağlı herhangi bir sistemdir
+- Ana bilgisayarlar süper bilgisayarlar veya ekmek kızartma makineleri olabilir
+- TCP / IP, internetteki herhangi bir ana bilgisayarın doğrudan iletişim kurmasına izin verir
+- Hem ana bilgisayarların hem de yönlendiricilerin TCP / IP yığınları vardır
+  - Ana bilgisayarların genellikle bir arabirimi vardır ve paketleri iletmez
+  - Yönlendiricilerin paket yönlendirme için 4. ve 5. katmanlara ihtiyacı yoktur
+
+# Özet
+
+- İnternet, tek bir sanal ağa bağlı fiziksel ağların bir koleksiyonudur
+- Yönlendiriciler ağlar arasındaki fiziksel ara bağlantı ve iletme paketlerini sağlar
+- Ana bilgisayarlar, yönlendiriciler tarafından iletilen paketler aracılığıyla birden çok ağ üzerinden iletişim kurar
+- TCP / IP en çok kullanılan internet protokol protokolüdür
