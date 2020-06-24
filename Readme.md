@@ -1607,8 +1607,8 @@
 # Intermediate capacity (Ara kapasite)
 
 - Fiyat doğrusal olarak hızlanmıyor
-- T3 için \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$ <28 için 28 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\* T1
-  ... ancak ihtiyacınız olan tek şey 9 Mbps ise, T3 için \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$> 6 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\* T1 için \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$\$
+- T3 için \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$ <28 için 28 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\* T1
+  ... ancak ihtiyacınız olan tek şey 9 Mbps ise, T3 için \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$> 6 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\* T1 için \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$\$
 - Çözüm: Birden fazla T1 hattını ters çoklayıcı ile birleştirin
 
 <center><image src="./image/intermediate.png" witdh="300" height="300"></center>
@@ -2377,7 +2377,7 @@ Gönderenin bir onay almadan önce birden fazla paket iletmesine izin verir
 - T<sub>w</sub> = min(B, T<sub>g</sub> \* W)
   - B is maximum network bandwidth
 
-# Network congestion (Network congestion)
+# Network congestion (Ağ tıkanıklığı(ağ sıkışması))
 
 - Ağ tıkanıklığı, birden çok bağlantı içeren ağ sistemlerinde ortaya çıkar
 - Bir bağlantıya giriş maksimum bant genişliğini aşarsa, paketler bu bağlantıya bağlandığında sıraya girer
@@ -2519,3 +2519,334 @@ Gönderenin bir onay almadan önce birden fazla paket iletmesine izin verir
 - Yönlendiriciler ağlar arasındaki fiziksel ara bağlantı ve iletme paketlerini sağlar
 - Ana bilgisayarlar, yönlendiriciler tarafından iletilen paketler aracılığıyla birden çok ağ üzerinden iletişim kurar
 - TCP / IP en çok kullanılan internet protokol protokolüdür
+
+# Motivation
+
+- Sanal ağın temel özelliklerinden biri tek, tek biçimli adres biçimidir
+- Farklı teknolojilerin farklı adres biçimleri olduğundan donanım adresleri kullanılamıyor
+- Adres biçimi, herhangi bir donanım adresi biçiminden bağımsız olmalıdır
+- Ana bilgisayar göndermek, hedef internet adresini pakete koyar
+- Hedef adres herhangi bir ara yönlendirici tarafından yorumlanabilir
+- Yönlendiriciler adresi inceler ve paketi hedefe iletir
+
+# TCP/IP addresses
+
+- TCP / IP'de adresleme İnternet Protokolü (IP) tarafından belirlenir
+- Her ana bilgisayara 32 bit sayı atanır
+- IP adresini veya İnternet adresini çağırdı
+- İnternetin tamamında benzersiz
+
+# IP address hierarchy
+
+- Her IP adresi bir önek ve bir sonek olarak ayrılmıştır
+  - Önek, bilgisayarın bağlı olduğu ağı tanımlar
+  - Sonek, bu ağdaki bilgisayarı tanımlar
+- Adres biçimi, yönlendirmeyi verimli hale getirir
+
+# Network and host numbers (Ağ ve ana host numaraları)
+
+- TCP / IP internetindeki her ağa benzersiz bir ağ numarası atanır
+- Belirli bir ağdaki her ana bilgisayara, o ağda benzersiz olan bir ana bilgisayar numarası veya ana bilgisayar adresi atanır
+- Ana bilgisayarın IP adresi, ağ numarası (önek) ve ana makine adresinin (sonek) birleşimidir
+
+# Porperties of IP addresses (IP adreslerinin özellikleri)
+
+- Ağ numaraları benzersizdir
+- Ana bilgisayar adresleri farklı ağlarda yeniden kullanılabilir; ağ numarası öneki ve ana bilgisayar adresi soneki kombinasyonu benzersiz olacaktır
+- Ağ numaralarının atanması global olarak koordine edilmelidir; ana bilgisayar adreslerinin atanması yerel olarak yönetilebilir
+
+# Designing the format of IP addresses (IP adreslerinin biçimini tasarlama)
+
+- IP tasarımcıları 32 bit adresleri seçti
+- Bazı ekler için önek, bazıları da sonek için ayırma
+  - Büyük önek, küçük sonek - birçok ağ, ağ başına birkaç ana bilgisayar
+  - Küçük önek, büyük sonek - az ağ, ağ başına birçok ana bilgisayar
+- Çeşitli teknolojiler nedeniyle, hem büyük hem de küçük ağlara izin vermeniz gerekiyor
+
+# Classes of addresses (Adres sınıfları)
+
+- Tasarımcılar bir uzlaşma seçti - hem büyük hem de küçük öneklere izin veren birden fazla adres biçimi
+- Her biçime adres sınıfı denir
+- Bir adresin sınıfı ilk dört bit ile tanımlanır
+
+<center><image src="./image/prefix.png" witdh="600" height="500"></center>
+
+# Using IP address classes (IP adresi sınıflarını kullanma)
+
+- A, B ve C sınıfı birincil sınıflardır
+- Normal ana bilgisayar adreslemesi için kullanılır
+- D Sınıfı, sınırlı bir yayın türü olan çok noktaya yayın için kullanılır
+  - İnternet sunucuları çok noktaya yayın grubuna katılır
+  - Paketler grubun tüm üyelerine teslim edilir
+  - Yönlendiriciler tek bir paketin kaynaktan çok noktaya yayın grubunun tüm üyelerine dağıtımını yönetir
+  - Mbone için kullanılır (çok noktaya yayın omurga)
+- E sınıfı ayrıldı
+
+# Dotted decimal notation (Noktalı ondalık gösterim)
+
+- A, B ve C Sınıflarının tümü byte sınırındaki önek ve sonek arasında kesilir
+- Noktalı ondalık gösterim, 32 bit internet adreslerini ondalık olarak temsil etmek için kullanılan bir kuraldır
+- Her adres baytını ondalık sayıya dönüştürün; noktalarla ayrılmış ekran (`` nokta '')
+
+<center><image src="./image/dotted.png" witdh="600" height="500"></center>
+
+# Bucknell's IP addresses (Bucknell'in IP adresleri)
+
+- Bucknell'in tek bir B Sınıfı ağı vardır: 134.82.0.0
+- Bucknell'deki tüm ev sahiplerinin 134.82 öneki var:
+  - 134.82.7.4 - coral
+  - 134.82.56.118 - regulus
+  - 134.82.250.4 - droms-dsl.bucknell.edu
+- Sonek baytları, alt ağ üzerinden yerel ağı ve ana bilgisayarı belirlemek için kullanılır
+
+# Address classes at a glance (Sınıflara bir bakışta hitap edin)
+
+- Noktalı ondalık, ağ adresinin ana bilgisayar adresinden ayrılmasını kolaylaştırırken, sınıfın belirlenmesi o kadar açık değildir
+- İlk noktalı ondalık sayıya bakın ve şu tabloyu kullanın:
+
+<center><image src="./image/glance.png" witdh="600" height="500"></center>
+
+# Networks and hosts in each class (Her sınıftaki ağlar ve ana bilgisayarlar)
+
+- Sınıflandırma şeması her sınıfta eşit sayıda ağ vermez
+- A sınıfı:
+  - İlk bit 0 olmalıdır
+  - Kalan 7 bit A Sınıfı ağı tanımlar
+  - 27 (= 128) olası A sınıfı ağ
+
+<center><image src="./image/hostclass.png" witdh="600" height="500"></center>
+
+# Internet address allocation (İnternet adresi tahsisi)
+
+- İnternet'teki adresler verimli kullanılmıyor
+- Bucknell tipik, 2,000-3 olası 2,000-3,000 kullanıyor
+- Büyük kuruluşlar İnternet'te ihtiyaç duydukları kadar adres alamayabilir
+- Örnek - UPS'in milyonlarca bilgisayar için adreslere ihtiyacı var
+- Çözüm - Özel internet kurun ve 32 bit adres alanının tamamından adresler ayırın
+
+# Example
+
+- Beklenen ana bilgisayar sayısına bağlı olarak her ağ için adres sınıfını seçin
+- Uygun sınıflardan ağ numaraları atayın
+- Tüm ana makineler için internet adresleri oluşturmak üzere ana bilgisayar son ekleri atayın
+
+<center><image src="./image/adrestahsisi.png" witdh="600" height="500"></center>
+
+# Special IP addresses
+
+<center><image src="./image/specialaddress.png" witdh="600" height="500"></center>
+
+# Berkeley broadcast address
+
+- UNIX'in ilk BSD uygulaması (Berkeley Yazılım Dağıtımı), yayın için 1'lerin yerine tüm 0'ları kullandı
+- Bu standart dışı uygulama BSD UNIX ile yayıldı
+- Bugün hala ortak kullanımda
+- `` Berkeley'den çıkan iki önemli gelişme var: BSD UNIX ve LSD. Bu bir tesadüf değil. ''
+- Anon.
+
+# Routers and IP addressing (Yönlendiriciler ve IP adresleme)
+
+- IP adresi ağ adresine bağlıdır
+- Ya iki ağa bağlı yönlendiriciler?
+- IP adresi, bir bilgisayarı değil, bir arabirimi veya ağ bağlantı noktasını belirtir
+- Yönlendiricinin birden çok IP adresi vardır - her arabirim için bir tane
+
+<center><image src="./image/routersandip.png" witdh="600" height="500"></center>
+
+# Multi-homed hosts (Çok bağlantılı ana makineler)
+
+- Ana bilgisayarlar (paketleri iletmeyen) birden fazla ağa da bağlanabilir
+- Güvenilirliği ve performansı artırabilir
+- Çok bağlantılı ana bilgisayarların her arabirim için bir adresi vardır
+
+# Summary
+
+- Sanal ağ, donanımdan bağımsız olarak tek tip adresleme şeması gerektirir
+- IP adresi 32 bitlik bir adrestir; her arabirim benzersiz bir IP adresi alır
+- IP adresi bir ağ adresi ve bir ana bilgisayar adresinden oluşur
+- Ağ adresleri üç ana sınıfa ayrılır: A, B ve C
+- Noktalı ondalık gösterim, İnternet adresleri için standart bir biçimdir: 134.82.11.70
+- Yönlendiricilerin birden fazla adresi vardır - her arabirim için bir tane
+
+# Introduction
+
+- Protokol yığınının üst seviyeleri protokol adreslerini kullanır
+- Ağ donanımı, nihai dağıtım için donanım adresini kullanmalıdır
+- Protokol adresi teslimat için donanım adresine çevrilmelidir; üç yöntemi tartışacak
+
+# Address translation (Adres çevirisi)
+
+- Üst düzeyler yalnızca protokol adreslerini kullanır
+  - "Sanal ağ" adresleme şeması
+  - Donanım ayrıntılarını gizler
+- Çeviri veri bağlantı katmanında gerçekleşir
+  - Üst katman eller aşağı protokol adresi hedef
+  - Veri bağlantı katmanı, donanım katmanı tarafından kullanılmak - üzere donanım adresine dönüşür
+
+# Address resolution (Adres çözümlemesi)
+
+- Protokol adresi için donanım adresi bulma:
+  adres çözünürlüğü
+- Veri bağlantı katmanı, protokol adresini donanım adresine çözümler
+- Çözünürlük bir ağ için yerel
+- Ağ bileşeni yalnızca aynı ağdaki diğer bileşenlerin adreslerini çözer
+
+<center><image src="./image/addressresolution.png" witdh="600" height="500"></center>
+
+- A, B'deki bir uygulamaya gönderilen A'daki bir uygulamadan gelen protokol iletileri için B'nin protokol adresini çözer
+- A, F için bir protokol adresini çözmüyor
+  - İnternet katmanı aracılığıyla A, R1 ve R2 üzerinden yönlendirerek F'ye teslim eder
+  - A, R1 donanım adresini çözer
+- A'daki ağ katmanı, R1'e teslim edilmek üzere hedef protokol adresi F'yi içeren paketi geçirir
+
+# Address resolution techniques (Adres çözümleme teknikleri)
+
+- Bir protokol adresi ile bir donanım adresi arasındaki ilişkiye bağlama denir
+- Üç teknik
+  - Tablo arama
+    - Protokol adresi anahtar olarak bellekte depolanan bağlamalar
+    - Veri bağlantı katmanı, donanım adresini bulmak için protokol adresini arar
+  - Kapalı form hesaplama
+    - Donanım adresine dayalı protokol adresi
+    - Veri bağlantı katmanı, donanım adresini protokol adresinden alır
+  - Dinamik
+    - "Tam zamanında" çözünürlük için kullanılan ağ mesajları
+    - Veri bağlantı katmanı, donanım adresi isteyen mesaj gönderir; destination donanım adresiyle yanıt verir
+
+# Table lookup (Tablo arama)
+
+- İnternetteki her ana bilgisayar için IP adresi ve donanım adresi içeren basit bir liste kullanın
+- IP adresini arayın ve ilgili donanım adresini çıkarın
+
+<center><image src="./image/tablelookup.png" witdh="600" height="500"></center>
+
+- Tüm IP adreslerinin aynı ön eke sahip olduğunu unutmayın; öneki bırakarak yerden tasarruf edebilir
+- Sıralı arama çok pahalı olabilir (O ​​(n<sup>2</sup>))
+- O (n) araması için indeksleme veya karma özelliğini kullanabilir
+  - Dizin oluşturma - IP adresinin hostid bölümünü liste (dizi) dizini olarak kullan
+
+<center><image src="./image/tablelookup2.png" witdh="600" height="500"></center>
+
+- Hashing - liste dizinini oluşturmak için hostid'de karma işlevini kullanma
+
+# Closed-form computation (Kapalı form hesaplama)
+
+- Donanım teknolojisi küçük, yapılandırılabilir donanım adresi kullanıyorsa, ağ yöneticisi IP adresini temel alarak donanım adresini seçebilir
+- Örnek - donanım yapılandırılabilen bir sekizli adres kullanıyor
+- Yalnızca barındırılacak donanım adresini seçin
+- Artık herhangi bir ana bilgisayar donanım adresini şu şekilde belirleyebilir:
+  - donanım_adresi = ip_adresi & 0xff
+
+# Dynamic resolution (Dinamik Cözüm)
+
+- IP adreslerini çözmek için ağı kullanın
+- Diğer bilgisayarlarla mesaj alışverişi donanım adresini kaynağa döndürür
+- İki tasarım:
+  - Sunucu tabanlı - bilgisayar adresi çözmek için sunucuya mesaj gönderir
+    - Sunucu listesi
+    - Sunucuları bulmak için yayınla
+- Dağıtılmış - tüm bilgisayarlar participate; destination, host donanım adresi sağlar
+
+# Dynamic resolution techniques (Dinamik çönürlük teknikleri)
+
+- Sunucu tabanlı - merkezi olmayan, yönetimi daha kolay, yayın dışı ortamlarda (ör. ATM) kullanılır
+- Dağıtılmış - özel bilgisayar gerektirmez, yönetim gerekmez
+
+<center><image src="./image/dynamicresolution.png" witdh="600" height="500"></center>
+
+# ARP
+
+- IP dağıtılmış çözünürlük tekniği kullanıyor
+- Adres Çözümleme Protokolü (ARP) - TCP / IP protokol paketinin parçası
+- İki parçalı protokol
+  - Kaynaktan donanım adresi isteyen istek
+  - Donanım adresi taşıyan hedeften yanıtla
+
+# ARP message exchange (ARP mesaj alışverişi)
+
+- ARP istek mesajı donanım çerçevesine düştü ve yayınlandı
+- Donanım çerçevesinde ayrı protokol türü kullanır (ethernet = 806)
+- Gönderen, iletiye ve yayına IP adresi ekler
+- Diğer her bilgisayar isteği inceler
+- IP adresi talep edilen bilgisayar yanıt veriyor
+  - Donanım adresini yanıtlar
+  - Gönderene Unicasts
+- Orijinal istekte bulunan daha sonra donanım adresini ayıklayabilir ve hedefe IP paketi gönderebilir
+
+# ARP example
+
+<center><image src="./image/arp.png" witdh="600" height="500"></center>
+
+# ARP message contents (ARP mesaj içeriği)
+
+- Protokol adresini donanım adresine eşler
+- Hem protokol adresi hem de donanım adresi boyutları değişkendir
+  - Ethernet = 6 octets
+  - IP = 4 octets
+- Diğer protokoller ve donanım türleri için kullanılabilir
+
+# ARP message format
+
+<center><image src="./image/arpmessage.png" witdh="600" height="500"></center>
+
+- HARDWARE ADDRESS TYPE = Ethernet için 1
+- PROTOCOL ADDRESS TYPE  = IP için 0x0800
+- OPERATION = istek için 1, yanıt için 2
+- Protokol adresinden donanım adresine kadar hem hedef hem de gönderen eşlemeleri içerir
+  - İstek, hedefin donanım adresini 0 olarak ayarlar
+  - Hedef gönderenin donanım adresini çıkarabilir (ARP isteğini kaydedebilir)
+  - Hedef değişim gönderen / yanıt olarak hedef
+
+# Sending an ARP message (ARP mesajı gönderme)
+
+- Gönderen ARP mesajı oluşturur
+- Donanım çerçevesinde veri olarak taşınan ARP mesajı - kapsülleme
+
+<center><image src="./image/sendarpmessage.png" witdh="600" height="500"></center>
+
+# Caching ARP responses (ARP yanıtlarını önbelleğe alma)
+
+- Her IP paketi için ARP kullanılması, her IP paketi için iki paket ek yükü ekler
+- Bilgisayar ARP yanıtlarını önbelleğe alır
+  - Sistem başlangıcında önbelleği temizler
+  - Periyodik olarak atılan girişler
+- ARP isteği gönderilmeden önce önbellek aranıyor
+
+# Identifying ARP frames (ARP çerçevelerini belirleme)
+
+- Ayrı çerçeve türü kullanır
+- Ethernet 0x0806 tipini kullanıyor
+
+<center><image src="./image/idarp.png" witdh="600" height="500"></center>
+
+# Processing ARP messages (ARP mesajlarını işleme)
+
+- Alıcı gönderenin donanım adresini alır ve yerel ARP tablosunu günceller
+- Alıcı işlemi kontrol eder - yanıt talebi
+- Response:
+  - Yerel önbelleğe gönderenin adresini ekler
+  - Bekleyen IP paketlerini gönderir
+- Request:
+  - Alıcı hedefse, yanıt oluşturur
+  - Gönderene Unicasts
+  - Yerel önbelleğe gönderenin adresini ekler
+- Not:
+  - Hedefin "yakında" yanıt vermesi muhtemel
+  - Bilgisayarlar ARP önbelleği için sınırlı depolama alanına sahiptir
+  - Yalnızca hedef göndereni önbelleğe ekler; diğerleri yalnızca hedef önbellekte bulunuyorsa güncellenir
+
+# Layering and address resolution (Katmanlama ve adres çözünürlüğü)
+
+- Adres çözünürlüğü (ARP) bir ağ arabirimi katmanı işlevidir
+- Tüm yüksek katmanlarda kullanılan protokol adresleri
+- Çirkin ayrıntıları gizler ve üst katmanlarda genelliğe izin verir
+
+<center><image src="./image/layerandaddress.png" witdh="600" height="500"></center>
+
+# Summary (Özet)
+
+- Adres çözümleme - protokol adresini donanım adresine çevirir
+  - Statik - tablo arama
+  - Hesaplama - donanım adresini protokol adresinden çıkarın
+  - Dinamik - protokol adresini çözmek için ağ mesajlarını kullanın
+- ARP - Adres çözümlemesi için TCP / IP protokolü
